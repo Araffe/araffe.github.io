@@ -1,0 +1,47 @@
+---
+author: adraffe
+comments: false
+date: 2013-03-08 19:27:04+00:00
+layout: post
+link: http://adamraffe.com/2013/03/08/l3-over-vpc-nexus-7000-vs-5000/
+slug: l3-over-vpc-nexus-7000-vs-5000
+title: 'L3 over vPC: Nexus 7000 vs 5000'
+wordpress_id: 308
+categories:
+- Nexus 5000
+- Nexus 7000
+- Virtual Port Channel
+tags:
+- Nexus
+- vPC
+---
+
+The lack of support for running layer 3 routing protocols over vPC on the Nexus 7000 is well documented - less well known however is that the Nexus 5500 platform operates in a slightly different way which _does_ actually allow layer 3 routing over vPC for unicast traffic. Some recent testing and subsequent discussions with one of my colleagues on this topic reminded me that there is still (somewhat understandably) a degree of confusion around this.
+
+Let's start with a reminder of what doesn't work on the Nexus 7000:
+
+[![L3-over-vPC-5Kvs7K1](http://adamraffe.files.wordpress.com/2013/03/l3-over-vpc-5kvs7k13.png?w=550)](http://adamraffe.files.wordpress.com/2013/03/l3-over-vpc-5kvs7k13.png)
+
+<!-- more -->In the diagram above, a router or similar device is connected to the two Nexus 7000 switches using a vPC and is attempting to form adjacencies with each peer. This design does not work on the Nexus 7000 as traffic may need to traverse the Peer-Link in order to reach its ultimate destination. The Nexus 7000 has a rule which says "any traffic received from the Peer-Link cannot be forwarded out via another vPC", therefore such traffic would be dropped. Here's a slightly different example:
+
+[![L3-over-vPC-5Kvs7K2](http://adamraffe.files.wordpress.com/2013/03/l3-over-vpc-5kvs7k2.png?w=550)](http://adamraffe.files.wordpress.com/2013/03/l3-over-vpc-5kvs7k2.png)
+
+In the above example, the routers or firewalls are single attached to the Nexus 7000 switches but do not connect using a vPC. This design doesn't work either on the Nexus 7000 as each router / firewall will form an adjacency with both Nexus 7000s, and traffic may still traverse the Peer-Link. The common solution to the above problem is to run a separate link between the two Nexus 7000s to handle the non-vPC traffic:
+
+[![L3-over-vPC-5Kvs7K3](http://adamraffe.files.wordpress.com/2013/03/l3-over-vpc-5kvs7k3.png?w=550)](http://adamraffe.files.wordpress.com/2013/03/l3-over-vpc-5kvs7k3.png)
+
+No surprises so far - the above restrictions are well documented in various guides on cisco.com.
+
+What _may_ surprise you is that the Nexus 5500 works in a slightly different way - as a result, there are some topologies that don't work on the Nexus 7000 but which _do_ work on the Nexus 5500 (when running a layer 3 module). Let's go back to our first example above, but this time let's replace the Nexus 7000s with Nexus 5500s running with layer 3 modules:
+
+[![L3-over-vPC-5Kvs7K4](http://adamraffe.files.wordpress.com/2013/03/l3-over-vpc-5kvs7k41.png?w=550)](http://adamraffe.files.wordpress.com/2013/03/l3-over-vpc-5kvs7k41.png)
+
+The above design is supported and works for **_unicast traffic__ only_**. Why is this? The reason is that the Nexus 5500 does not handle traffic received from the Peer-Link in the same way as the Nexus 7000, therefore this traffic _will_ be forwarded out on another vPC. Note however that traffic flows may still be suboptimal (i.e. traffic may arrive at Nexus 5500-1, only to have to traverse the Peer-Link to reach Nexus 5500-2), however the Peer-Gateway feature can be enabled to resolve this. I should note at this point that officially, the above design still isn't recommended (although it works and is supported) - one of the reasons for this is that multicast traffic is subject to the same restrictions as on the Nexus 7000 and therefore does not work properly in this scenario.
+
+If this hasn't completely blown your mind, then I have one final topology to show you:
+
+[![L3-over-vPC-5Kvs7K5](http://adamraffe.files.wordpress.com/2013/03/l3-over-vpc-5kvs7k5.png?w=550)](http://adamraffe.files.wordpress.com/2013/03/l3-over-vpc-5kvs7k5.png)
+
+In the above example, two routers are single attached to the Nexus 5500s. There is a separate link for non-vPC traffic and the Peer-Gateway feature is enabled. This should work, right? Actually it doesn't - in this scenario, OSPF adjacencies would not form properly. Note that this is specific to the scenario where there is a non-vPC link _and_ Peer-Gateway is turned on. The solution to this is to revert to running the routed VLAN over the Peer-Link - which does work (for unicast traffic only).
+
+Hopefully this will help to clear up some of the confusion - thanks for reading!

@@ -1,0 +1,18 @@
+---
+author: adraffe
+comments: true
+date: 2017-04-08 21:00:30+00:00
+layout: post
+link: http://adamraffe.com/2017/04/08/moving-on/
+slug: moving-on
+title: Moving on
+wordpress_id: 1223
+---
+
+A little over three years ago, I was introduced to Cisco's Application Centric Infrastructure (ACI) for the first time. For someone who had spent many years at Cisco working on "traditional" networking platforms, this was something of a revelation - the ability to define network connectivity in a programmable manner using a policy based model was a major departure from anything I had done before. Since then, I've been lucky enough to work with a variety of customers around the globe, helping them to design and deploy the ACI solution. I've been part of a great team of people, worked closely with the INSBU team (responsible for ACI) and presented to hundreds of people at Cisco Live.
+
+Over the last few months, I've spent some time thinking about what I do next: as ACI becomes more mainstream, do I continue with more of the same - expanding my skill set to include the other great products (Tetration, Cloudcenter,etc) that Cisco has in the data centre - or do I take a slightly different path? After some serious consideration, I've decided to go with the latter option - later this month, I'll be joining Microsoft as a Cloud Solutions Architect, working with the Azure platform.
+
+I've thoroughly enjoyed writing this blog over the last few years and want to thank everyone who has read the posts, commented or given me feedback. I'm hoping to continue blogging occasionally, so keep an eye out for the odd Azure-related post!
+
+Adam
