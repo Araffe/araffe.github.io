@@ -1,5 +1,5 @@
 ---
-author: adraffe
+author: Adam
 comments: true
 date: 2015-01-06 20:57:36+00:00
 layout: post
