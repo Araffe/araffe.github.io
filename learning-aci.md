@@ -8,7 +8,8 @@ description:
 This is a series of blog posts I wrote a few years back whilst working on the Application Centric Infrastructure solution at Cisco. **I no longer work at Cisco and won’t be updating these posts**; however, I’m keeping them here as they may still be useful for people starting out with ACI.
 
 Here is a consolidated  list of blog entries in the Learning ACI series:
-Part 1: Overview – Provides a very high level overview of ACI and what to expect from the blog series
+
+[Part 1:](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-1-overview.html) Overview – Provides a very high level overview of ACI and what to expect from the blog series
 
 Part 2: Bringing Up An ACI Fabric – Part 2 takes you through bringing up an ACI fabric for the first time, provisioning an APIC cluster and discovering the leaf and spine switching nodes in your network.
 
