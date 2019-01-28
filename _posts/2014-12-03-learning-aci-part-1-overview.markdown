@@ -3,7 +3,7 @@ author: Adam
 comments: true
 date: 2014-12-03 16:50:07+00:00
 layout: post
-link: http://adamraffe.com/2014/12/03/learning-aci-part-1-overview/
+link: http://araffe.github.io/2014/12/03/learning-aci-part-1-overview/
 slug: learning-aci-part-1-overview
 title: 'Learning ACI - Part 1: Overview'
 wordpress_id: 702
