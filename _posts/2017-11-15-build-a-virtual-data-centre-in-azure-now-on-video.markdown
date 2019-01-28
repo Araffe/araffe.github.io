@@ -3,7 +3,7 @@ author: Adam
 comments: true
 date: 2017-11-15 17:23:30+00:00
 layout: post
-link: http://adamraffe.com/2017/11/15/build-a-virtual-data-centre-in-azure-now-on-video/
+link: http://araffe.github.io/Azure/2017/11/15/build-a-virtual-data-centre-in-azure-now-on-video/
 slug: build-a-virtual-data-centre-in-azure-now-on-video
 title: Build a Virtual Data Centre in Azure - Now on Video!
 wordpress_id: 1659
