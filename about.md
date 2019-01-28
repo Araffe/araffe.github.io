@@ -1,9 +1,7 @@
 ---
 layout: page
 title: About
-permalink: /about/
 ---
-
 
 <br/>
 Adamraffe.com is the personal blog of Adam Raffe and is focused on data centre and cloud.
@@ -20,4 +18,3 @@ I am a Solutions Architect at Amazon Web Services in the UK, focusing on the lar
 	<a href="http://uk.linkedin.com/in/adamraffe" target="_blank"><i class="fa fa-linkedin-square"></i></a>
 	<a href="https://twitter.com/adamraffe" target="_blank"><i class="fa fa-twitter-square"></i></a>
 </span>
-
