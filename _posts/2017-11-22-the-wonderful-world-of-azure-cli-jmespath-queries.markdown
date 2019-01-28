@@ -1,8 +1,13 @@
 ---
 author: Adam
+comments: true
 date: 2017-11-22 11:19:52+00:00
 layout: post
+slug: the-wonderful-world-of-azure-cli-jmespath-queries
 title: Azure CLI JMESPath Queries
+wordpress_id: 1674
+categories:
+- Azure
 ---
 
 I use the Azure CLI for much of what I do in Azure now - true, the same things can usually be achieved through the portal or by using PowerShell, but I just prefer the Linux / Bash nature of the CLI.
