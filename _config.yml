@@ -6,7 +6,7 @@ permalink:           pretty
 # Setup
 title:               Adam Raffe
 tagline:             'Cloud, Data Centre & Networking'
-description:         'Adam's blog, focused on cloud computing, data centre & networking'
+description:         'Cloud, Data Centre & Networking'
 url:                 http://lanyon.getpoole.com
 baseurl:             ''
 paginate:            5
@@ -18,3 +18,4 @@ author:
   email:             
 
 # Custom vars
+version:             1.0.0
