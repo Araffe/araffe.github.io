@@ -3,10 +3,8 @@ author: Adam
 comments: true
 date: 2017-11-22 11:19:52+00:00
 layout: post
-link: http://adamraffe.com/2017/11/22/the-wonderful-world-of-azure-cli-jmespath-queries/
-slug: the-wonderful-world-of-azure-cli-jmespath-queries
+slug: azure-cli-jmespath-queries
 title: Azure CLI JMESPath Queries
-wordpress_id: 1674
 categories:
 - Azure
 ---
