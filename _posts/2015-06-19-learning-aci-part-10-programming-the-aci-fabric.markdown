@@ -44,25 +44,25 @@ Before you start, it's worth bearing in mind that to use the REST API effectivel
 
 To get to Visore, browse to <APIC-IP-address>/visore.html and log in. Once in, you'll be able to query for classes or objects using the search box at the top of the screen. In this example, I'm going to search for all instances of class _fvTenant:_
 
-[![Visore-fvTenant](https://adamraffe.files.wordpress.com/2015/06/visore-fvtenant.png)](https://adamraffe.files.wordpress.com/2015/06/visore-fvtenant.png)
+[![Visore-fvTenant]({{ site.baseurl }}/img/2015/06/visore-fvtenant.png)]({{ site.baseurl }}/img/2015/06/visore-fvtenant.png)
 
 In the above screenshot, my query has returned 32 objects of class fvTenant (I have 32 tenants on my fabric), two of which I have shown here. From here, you can see the distinguished name of each tenant object (e.g. _uni/tn-LAN01_). Now, the really useful part of this is that clicking the right arrow (>) next to the distinguished name will take you to another screen showing all of the child objects of the tenant object in question:
 
-[![Visore-children](https://adamraffe.files.wordpress.com/2015/06/visore-children.png)](https://adamraffe.files.wordpress.com/2015/06/visore-children.png)
+[![Visore-children]({{ site.baseurl }}/img/2015/06/visore-children.png)]({{ site.baseurl }}/img/2015/06/visore-children.png)
 
 In the above screenshot, you can see two of the child objects for my tenant (named "adraffe-test") - specifically, we see an application profile (class fvAp, named "Test-App-1) and a bridge domain (class fvBD, named "Adam-Test-BD"). Scrolling further down reveals additional objects such as private networks, contracts and filters. Clicking the right arrow next to the DN takes you further down the tree - for example, drilling further into the "fvAp" object here would take me to the EPG objects contained within.
 
 Now that we have some knowledge of the object model, we can start with some basic interaction with the REST API. The first thing I need to do is authenticate, which I can do by posting to the URL in the screen shot below and sending the XML shown:
 
-[![aaaLogin](https://adamraffe.files.wordpress.com/2015/06/aaalogin.png)](https://adamraffe.files.wordpress.com/2015/06/aaalogin.png)
+[![aaaLogin]({{ site.baseurl }}/img/2015/06/aaalogin.png)]({{ site.baseurl }}/img/2015/06/aaalogin.png)
 
 Now that I've authenticated, I can start creating some objects through the ACI. I'll start by creating a new tenant named 'Finance':
 
-[![Tenant-Create](https://adamraffe.files.wordpress.com/2015/06/tenant-create.png)](https://adamraffe.files.wordpress.com/2015/06/tenant-create.png)
+[![Tenant-Create]({{ site.baseurl }}/img/2015/06/tenant-create.png)]({{ site.baseurl }}/img/2015/06/tenant-create.png)
 
 That's it - sending that simple piece of XML to the APIC created a new tenant. Now let's create a private network, bridge domain, application profile and EPG inside my new tenant. I post to the same URL as in the last example (the "uni" in the URL is used to represent "policy universe"), but this time I send the following:
 
-[![Tenant XML](https://adamraffe.files.wordpress.com/2015/06/tenant-xml.png)](https://adamraffe.files.wordpress.com/2015/06/tenant-xml.png)
+[![Tenant XML]({{ site.baseurl }}/img/2015/06/tenant-xml.png)]({{ site.baseurl }}/img/2015/06/tenant-xml.png)
 
 Let's take a closer look at what the above XML does. Firstly, I need to include the parent tenant object I want to modify (Finance). I then create a new private network (fvCtx) named _Finance-Net_. Next, I create a bridge domain (fvBD) named _Finance-BD_, with a subnet address (fvSubnet) of 10.1.1.1/24. I also create a relationship between my new bridge domain and the private network I created earlier (using fvRsCtx). Next up, I create an application profile (fvAp) called _Finance-AP1_ and add a new EPG (fvAEPg) to it named _Finance-EPG_. Finally, I create a relationship from my new EPG to the BD I created earlier (using fvRsBd).
 
@@ -74,7 +74,7 @@ If you are familiar with Python, Cisco have a Python SDK (also known as "Cobra")
 
 As a comparison, let's take a look at the equivalent Python code which would create the same tenant, private network, bridge domain and EPG we created earlier (note that there is more to this script not shown here, such as importing the relevant modules, logging into the APIC, etc):
 
-[![Cobra-Code](https://adamraffe.files.wordpress.com/2015/06/cobra-code.png)](https://adamraffe.files.wordpress.com/2015/06/cobra-code.png)
+[![Cobra-Code]({{ site.baseurl }}/img/2015/06/cobra-code.png)]({{ site.baseurl }}/img/2015/06/cobra-code.png)
 
 Anyone not familiar with Python may at this point be wondering if they should steer clear of the Python SDK - however, fear not: there is an extremely cool tool which will take the XML or JSON which you provide and automatically generate Python code for you. This tool is called _arya_ (APIC REST Python Adapter) and is available here:
 
@@ -90,7 +90,7 @@ The ACI Toolkit is essentially a set of Python libraries which takes the ACI obj
 
 Here is an example of how the ACI Toolkit can be used to create some common objects within ACI:
 
-[![Toolkit](https://adamraffe.files.wordpress.com/2015/06/toolkit.png)](https://adamraffe.files.wordpress.com/2015/06/toolkit.png)
+[![Toolkit]({{ site.baseurl }}/img/2015/06/toolkit.png)]({{ site.baseurl }}/img/2015/06/toolkit.png)
 
 One other nice bonus of the ACI Toolkit is that a number of applications are thrown in, such as the Snapback app (used for config rollback within ACI), End Point Tracker (used to keep track of and display end point information within the fabric), various visualisation tools and more.
 

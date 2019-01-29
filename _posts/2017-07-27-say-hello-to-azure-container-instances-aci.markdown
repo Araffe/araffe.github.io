@@ -33,23 +33,23 @@ To see how ACI works, let's try it out. To start with, I'm going to create a sin
 
 This command is essentially asking for a container to be created under the resource group named "ACI", with a name of "acitest", using the public nginx image (which will be pulled from Docker Hub). The command also asks for a public IP address to be assigned to the container. The results of this can be seen in the following figure:
 
-![ACI1](https://adamraffe.files.wordpress.com/2017/07/aci11.jpg)
+![ACI1]({{ site.baseurl }}/img/2017/07/aci11.jpg)
 
 
 
 The JSON output that results shows a wealth of information about the container - for example, I can see the amount of CPU and memory (1 CPU core, 1.5Gb of RAM - this is configurable), the IP address that has been assigned as well as some information about the resource group. You can also see that the provisioning state is "creating". If I run the command _az container list _a few seconds later, I can see the container state is now "succeeded":
 
-![ACI2](https://adamraffe.files.wordpress.com/2017/07/aci2.jpg)
+![ACI2]({{ site.baseurl }}/img/2017/07/aci2.jpg)
 
 At this point, I can browse to the public IP address that Azure assigned to my container and I receive the default nginx page.
 
 I can also get the log output from the container using the command _az container logs_:
 
-![ACI4](https://adamraffe.files.wordpress.com/2017/07/aci4.jpg)
+![ACI4]({{ site.baseurl }}/img/2017/07/aci4.jpg)
 
 OK, so this is all very nice - but wouldn't it be great if we could automate this process? And it would be even better if we could create multiple container instances at the same time. It is of course possible to do this using ARM templates. Check out the example template below (full template available [here](https://github.com/Araffe/armtemplates/tree/master/containers/aci-demo)):
 
-![ACI5](https://adamraffe.files.wordpress.com/2017/07/aci51.jpg)
+![ACI5]({{ site.baseurl }}/img/2017/07/aci51.jpg)
 
 The JSON shown above should do the following:
 
@@ -69,10 +69,10 @@ This template introduces us to the container group concept. The idea behind this
 
 So let's deploy this template and see what happens:
 
-![ACI6](https://adamraffe.files.wordpress.com/2017/07/aci6.jpg)
+![ACI6]({{ site.baseurl }}/img/2017/07/aci6.jpg)
 
 OK, everything looks good. The output of the script has given me the public IP address of the container group - let's try and browse to that:
 
-![ACI7](https://adamraffe.files.wordpress.com/2017/07/aci7.jpg)
+![ACI7]({{ site.baseurl }}/img/2017/07/aci7.jpg)
 
 Success! Hopefully this post has given you a taster of what Azure Container Instances can do and the potential they have. Thanks for reading!

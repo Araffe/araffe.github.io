@@ -20,7 +20,7 @@ tags:
 
 The 1.1(1j) & 11.1(1j) release of ACI introduced support for _transit routing._ Prior to this, the ACI fabric acted as a 'stub' routing domain; that is, it was not previously possible to advertise routing information from one routing domain to another through the fabric. I covered L3 Outsides in [part 9](http://adamraffe.com/2015/03/29/learning-aci-part-9-layer-3-external-connectivity/) of this series where I discussed how to configure a connection to a single routed domain. In this post, we'll look at a scenario where the fabric is configured with two L3 Outsides and how to advertise routes from one to another. Here is the setup I'm using:
 
-[![Transit-Routing](https://adamraffe.files.wordpress.com/2015/10/transit-routing5.jpg)](https://adamraffe.files.wordpress.com/2015/10/transit-routing5.jpg)
+[![Transit-Routing]({{ site.baseurl }}/img/2015/10/transit-routing5.jpg)]({{ site.baseurl }}/img/2015/10/transit-routing5.jpg)
 
 <!-- more -->In my lab, I have a single 4900M switch which I have configured with two VRFs (Red and Green) to simulate the two routing domains. In the Red VRF, I have one loopback interface - Lo60 (10.1.60.60) which is being advertised into OSPF. In the Green VRF, I have Lo70 (10.1.70.70) and Lo90 (10.1.90.90) which are also being advertised into a separate OSPF process.
 
@@ -28,11 +28,11 @@ On the ACI fabric side, I have two L3 Outsides which correspond to the two VRFs.
 
 At this point, my OSPF adjacencies are formed and my ACI fabric is receiving routing information from both VRFs on the 4900M, as can be seen in the following output (taken from the 'Fabric | Inventory' tab and then under the specific leaf node, under the Protocols | OSPF section):
 
-[![Screen Shot 2015-10-17 at 17.38.33](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-17-38-33.png)](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-17-38-33.png)
+[![Screen Shot 2015-10-17 at 17.38.33]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-17-38-33.png)]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-17-38-33.png)
 
 You can see from this output that the fabric is receiving all of the routes for the loopback addresses configured under the Red and Green VRFs on the 4900M. Let's now take a look at the routing table for the Red VRF on the 4900M:
 
-[![Screen Shot 2015-10-17 at 17.42.40](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-17-42-40.png)](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-17-42-40.png)
+[![Screen Shot 2015-10-17 at 17.42.40]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-17-42-40.png)]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-17-42-40.png)
 
 It's clear from the above output that the Red VRF is not receiving information about either the 10.1.70.0 or 10.1.90.0 prefixes from the Green VRF - in other words, the ACI fabric is not currently re-advertising routes that it has received from one L3 Outside to the other.
 
@@ -52,31 +52,31 @@ Let's say I now want to advertise the prefixes from the Green VRF (10.1.70.0/24 
 
 How are these used in practice? Let's start with a simple example. I'm going to advertise just one of my 'Green' subnets (let's say 10.1.70.0/24) towards the 'Red' VRF. To do this, I add the 10.1.70.0 subnet to the L3 Out facing the Red VRF and mark it with the 'export route control' option:
 
-[![Screen Shot 2015-10-17 at 19.33.01](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-19-33-01.png)](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-19-33-01.png)
+[![Screen Shot 2015-10-17 at 19.33.01]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-19-33-01.png)]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-19-33-01.png)
 
 Now if I check the 'Red' routing table, I see the 10.1.70.0 prefix advertised from the fabric:
 
-[![Screen Shot 2015-10-17 at 19.34.37](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-19-34-37.png)](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-19-34-37.png)
+[![Screen Shot 2015-10-17 at 19.34.37]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-19-34-37.png)]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-19-34-37.png)
 
 If I add the 10.1.90.0/24 prefix to my subnets list, that transit route will also be advertised from the fabric to the Red VRF.
 
 You might now be wondering how you would handle a large list of transit routes; would they all need to be individually entered into the subnets list? No - you can use the _Aggregate Export_ option. This option is currently only available when "0.0.0.0/0" is used as the subnet; essentially, this option tells the fabric to advertise _all_ transit routes. Checking the 'aggregate' option is important here - if you simply enter "0.0.0.0/0" as an export route control subnet without the aggregate option, the fabric will try and advertise the 0.0.0.0/0 route _only_. In my example, I've now removed the individual subnet and entered 0.0.0.0/0 with the aggregate option:
 
-[![Screen Shot 2015-10-17 at 19.39.56](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-19-39-56.png)](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-19-39-56.png)
+[![Screen Shot 2015-10-17 at 19.39.56]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-19-39-56.png)]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-19-39-56.png)
 
 I now see both my subnets advertised to the Red VRF:
 
-[![Screen Shot 2015-10-17 at 19.41.12](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-19-41-12.png)](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-19-41-12.png)
+[![Screen Shot 2015-10-17 at 19.41.12]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-19-41-12.png)]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-19-41-12.png)
 
 So that's the routing taken care of - but there's an additional step if you want traffic to flow. Remember, the ACI fabric models external destinations as EPGs. If you have two external destinations that need to communicate through the fabric, you must have both of those external destinations covered by a Security Import Subnet. As an example, if I wanted to allow hosts on 10.1.60.60 (part of the Red VRF) to talk to hosts on 10.1.70.70 (Green VRF), in addition to exporting the routes themselves (in both directions), I would need to define both of those subnets with the security import option:
 
 **4900M-External Subnets Configuration:**
 
-[![Screen Shot 2015-10-17 at 19.45.38](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-19-45-38.png)](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-19-45-38.png)
+[![Screen Shot 2015-10-17 at 19.45.38]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-19-45-38.png)]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-19-45-38.png)
 
 **4900M-External-2 Subnets Configuration:**
 
-[![Screen Shot 2015-10-17 at 19.47.57](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-19-47-57.png)](https://adamraffe.files.wordpress.com/2015/10/screen-shot-2015-10-17-at-19-47-57.png)
+[![Screen Shot 2015-10-17 at 19.47.57]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-19-47-57.png)]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-19-47-57.png)
 
 I would then need to provide / consume contracts between these networks for traffic to flow. In the above example, I could have just created a single 0.0.0.0/0 subnet on each side and marked it with export route control, aggregate export and security import options - that would effectively allow all routes and all destinations to communicate with each other (assuming contracts).
 

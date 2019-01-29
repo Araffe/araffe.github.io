@@ -16,7 +16,7 @@ tags:
 
 Azure has a number of ways in which to run containers, ranging from simple IaaS VMs running Docker, to Azure Container Service (a service that provisions a full container cluster using Kubernetes, Swarm or DC/OS) and [Azure Container Instances](http://adamraffe.com/2017/07/27/say-hello-to-azure-container-instances-aci/). One of the characteristics of these services is that when a container is provisioned, it typically has an IP address allocated to it from within the local host, rather than from the Azure virtual network to which the host is connected. As an example, consider the following scenario where we have a single Azure IaaS virtual machine running Ubuntu and Docker:
 
-![Container-net1](https://adamraffe.files.wordpress.com/2017/09/container-net11.jpg)<!-- more -->
+![Container-net1]({{ site.baseurl }}/img/2017/09/container-net11.jpg)<!-- more -->
 
 In the very simple example above, we have an Azure virtual machine running Docker attached to a virtual network, which has an address range of 10.3.1.0/24. The host itself (or technically, its NIC) is allocated an IP address from the VNet range. The container itself is allocated an IP address from the Docker0 bridge address range (typically 172.17.0.0/16). Although this works fine (NAT takes place within the host to connect the container to the outside world), we lose a certain amount of visibility into the container's address space from the Azure world - so it becomes more difficult to apply Azure networking features such as Network Security Groups (NSGs). Wouldn't it be nice if we could have our containers sitting directly on an Azure VNet, with an IP address assigned from that VNet range? In fact, we can now do this using a set of network plugins, available [here](https://github.com/Azure/azure-container-networking). Let's have a look at how these plugins work.
 
@@ -91,7 +91,7 @@ Now that we have this additional IP address in place, let's try creating the con
 
 This time, the container is created - doing an ifconfig from within the container shows that it has an IP address of 10.3.1.5, which sits directly on the Azure VNet I am using. Let's have a look at what this looks like:
 
-![Container-net2](https://adamraffe.files.wordpress.com/2017/09/container-net2.jpg)
+![Container-net2]({{ site.baseurl }}/img/2017/09/container-net2.jpg)
 
 
 ### **Connecting Kubernetes Clusters to Azure Virtual Networks**

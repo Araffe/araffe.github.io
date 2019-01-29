@@ -16,13 +16,13 @@ A question I've heard a few times recently is "_if I have services running in an
 
 First, a few basics: a Virtual Network (VNet) is a private, isolated, network within Azure into which you can deploy infrastructure resources such as virtual machines, load balancers and so on:
 
-![Secure-VNets1](https://adamraffe.files.wordpress.com/2017/09/secure-vnets11.jpg)
+![Secure-VNets1]({{ site.baseurl }}/img/2017/09/secure-vnets11.jpg)
 
 Although these VMs can (and very often do) have direct Internet access, it is of course possible to restrict connectivity into and out of this VNet according to your requirements.
 
 Now consider the myriad of public services available in Azure, such as Blob Storage and Azure SQL. As these services are public, they do _not_ sit inside a virtual network and are not isolated from the "outside world". The question is, if I want to connect from a VM inside a VNet to a public service such as Blob Storage, how does that work? It's actually pretty straightforward - VMs connect to Blob Storage or other Azure services using the normal Internet facing end points (e.g. _<storageaccount>.blob.core.windows.net), as shown in the following diagram:
 
-![Secure-VNets2.jpg](https://adamraffe.files.wordpress.com/2017/09/secure-vnets22.jpg)
+![Secure-VNets2.jpg]({{ site.baseurl }}/img/2017/09/secure-vnets22.jpg)
 
 OK, that's fine - but doing it this way does open up a couple of issues:
 
@@ -45,7 +45,7 @@ Luckily, there is now a solution to this issue: [NSG Service Tags](https://docs.
 
 The rule allowing access to storage would look like this:
 
-![Secure-VNets3](https://adamraffe.files.wordpress.com/2017/09/secure-vnets31.jpg)
+![Secure-VNets3]({{ site.baseurl }}/img/2017/09/secure-vnets31.jpg)
 
 So by using NSG Service Tags, we can simply specify the Azure public service we want to give access to without having to worry about IP addresses - much easier.
 
@@ -55,23 +55,23 @@ Our second issue is that - regardless of the authentication mechanisms we implem
 
 To enable this, the first thing we do is enable Service Endpoints on the VNet (in this case, I'm using storage as an example):
 
-![Secure-VNets4](https://adamraffe.files.wordpress.com/2017/09/secure-vnets4.jpg)
+![Secure-VNets4]({{ site.baseurl }}/img/2017/09/secure-vnets4.jpg)
 
 The second thing we need to do is to turn off access from any network on the storage account and only allow the specific VNets in question. This is done from the storage account configuration:
 
-![Secure-VNets5](https://adamraffe.files.wordpress.com/2017/09/secure-vnets5.jpg)
+![Secure-VNets5]({{ site.baseurl }}/img/2017/09/secure-vnets5.jpg)
 
 Now that that's configured, the VM within my VNet / subnet can access objects within the storage account, while that same account can no longer be accessed from the Internet:
 
-![Secure-VNets6](https://adamraffe.files.wordpress.com/2017/09/secure-vnets6.jpg)
+![Secure-VNets6]({{ site.baseurl }}/img/2017/09/secure-vnets6.jpg)
 
 If we take a look at the effective routes associated with my virtual machine's NIC, we can see that we have some additional routes added for the service endpoint:
 
-![Secure-VNets7](https://adamraffe.files.wordpress.com/2017/09/secure-vnets7.jpg)
+![Secure-VNets7]({{ site.baseurl }}/img/2017/09/secure-vnets7.jpg)
 
 One other interesting point is that I can no longer access the storage account even from within the Azure portal:
 
-![Secure-VNets8](https://adamraffe.files.wordpress.com/2017/09/secure-vnets8.jpg)
+![Secure-VNets8]({{ site.baseurl }}/img/2017/09/secure-vnets8.jpg)
 
 That's it - hopefully it's clear from this post how these new features make securing access to Azure public services much easier. Thanks for reading!
 
