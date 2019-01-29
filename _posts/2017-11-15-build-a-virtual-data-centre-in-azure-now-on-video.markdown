@@ -13,8 +13,8 @@ categories:
 
 A few months back, I created a lab workshop focused around building virtual data centres in Azure (see [here](http://adamraffe.com/2017/09/05/check-out-my-azure-virtual-data-centre-lab/) for more details). Given how successful this workshop has been when running it with partners, I've now recorded a video with my colleague Dan Baker that takes viewers through the whole process of building the VDC environment. The video is less than an hour long and will walk you through the entire lab build, explaining each step along the way.
 
-The video is available on [YouTube](https://youtu.be/P3jYQCadKmM), or you can view it directly below.
+The video is available on [YouTube](https://youtu.be/P3jYQCadKmM) now.
 
 Enjoy!
 
-[youtube https://www.youtube.com/watch?v=P3jYQCadKmM&w=560&h=315]
+
