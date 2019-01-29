@@ -23,7 +23,7 @@ Woah! I just got a ton of JSON back from that command. What you see in this scre
 I'll add a query to the original command that should give me only the names of the VMs. The command I'll run is as follows:
 
     
-     <strong>az vm list -g demo.VMs --query [].[name]</strong>
+{% highlight shell %}az vm list -g demo.VMs --query [].[name]{% endhighlight %}
 
 
 This gives me back something much more civilised:
@@ -43,7 +43,7 @@ Now, I've decided that - along with the VM name - I want to know the name of the
 From the above, it looks like the field I am looking for (name) is buried under the 'storageProfile' object and then under 'osDisk'. So let's add this to the query and see what happens:
 
     
-    <strong>az vm list -g demo.VMs --query [].[name,storageProfile.osDisk.name] -o table</strong>
+{% highlight shell %}az vm list -g demo.VMs --query [].[name,storageProfile.osDisk.name] -o table{% endhighlight %}
 
 
 ![Queries-5](https://adamraffe.files.wordpress.com/2017/11/queries-5.jpg)
@@ -51,7 +51,7 @@ From the above, it looks like the field I am looking for (name) is buried under 
 Nice! I can now see the name of the VMs and the OS disk used by each one. However, I'm still not happy that the column headings in my tables are simply labelled 'Column1', 'Column2', etc. To add a nice friendly column heading, I can add the heading I want to the query as follows:
 
     
-    <strong>az vm list -g demo.VMs --query "[].{Name:name,Disk:storageProfile.osDisk.name}" -o table</strong>
+{% highlight shell %}az vm list -g demo.VMs --query "[].{Name:name,Disk:storageProfile.osDisk.name}" -o table{% endhighlight %}
 
 
 ![Queries-6](https://adamraffe.files.wordpress.com/2017/11/queries-6.jpg)
@@ -61,7 +61,7 @@ Perfect. Note that this time, I have used curly brackets for the second part of 
 In my examples so far, I'm getting information back about both the Linux and Windows VMs that live in my resource group. The problem is, I'm only really interested in the Windows VMs - so how do I narrow this query down even further to only include the Windows machine? Well, we can set up the query to look only for the elements in our array containing a certain value - in this case, we want to make sure that only the elements that contain 'Windows' make it into our output. Here's how it's done:
 
     
-    <strong>az vm list -g demo.VMs --query "[?contains(name, 'Windows')].{Name:name,Disk:storageProfile.osDisk.name}" -o table</strong>
+{% highlight shell %}az vm list -g demo.VMs --query "[?contains(name, 'Windows')].{Name:name,Disk:storageProfile.osDisk.name}" -o table{% endhighlight %}
 
 
 This gives us the following:
@@ -71,7 +71,7 @@ This gives us the following:
 Now let's take this a bit further. Suppose I want to get a list of all the VMs _not _currently running (i.e. deallocated) and with 'Linux' in the name - and then start those VMs. One way of achieving this is to do the following:
 
     
-    <strong>az vm list -g demo.VMs --show-details --query "[?contains(name, 'Linux') && powerState == 'VM deallocated']".id -o tsv | xargs -L1 bash -c 'az vm start --ids $0'</strong>
+    {% highlight shell %}az vm list -g demo.VMs --show-details --query "[?contains(name, 'Linux') && powerState == 'VM deallocated']".id -o tsv | xargs -L1 bash -c 'az vm start --ids $0'{% endhighlight %}
 
 
 There's a bit going on here, so let's break it down. In the first part of the command, we run the **az vm list **command, but this time we add the **--show-details** parameter (only this extended version of the command shows the power state of the virtual machine). Then we add a query that returns only those VMs that a) have 'Linux' in the name and b) have a current power state of 'VM deallocated'. We also want to make sure that we return only the ID of the VM - hence the **.id** on the end of the query. Now the table output format that we've been using up until now isn't going to work here, so we'll need to use a different output format - in this case we're going to use the tab separated output format (**-o tsv**) instead.
