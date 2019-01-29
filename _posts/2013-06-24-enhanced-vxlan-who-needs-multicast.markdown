@@ -23,7 +23,7 @@ With the release of version 4.2(1)SV2(2.1) of the Nexus 1000V, Cisco have introd
 
 The first thing to understand about enhanced VXLAN is that there are two unicast modes in which the feature can run: "Flood and Learn" mode, or "MAC Distribution" mode (also known as "Floodless" mode). We'll discuss the differences between these modes in a bit, but the most important point about both of these is that for broadcast and multicast traffic, the VTEP (VXLAN Tunnel End Point) where the source VM resides will perform _head-end replication_ to the other VTEPs that have VMs residing in the same VXLAN / segment. This essentially means that the sending VTEP will replicate the broadcast or multicast packet locally and send it to all hosts participating in the VXLAN in question. Let's look at an example of this:
 
-[![Enhanced-VXLAN-1](http://adamraffe.files.wordpress.com/2013/05/enhanced-vxlan-12.png?w=550)](http://adamraffe.files.wordpress.com/2013/05/enhanced-vxlan-12.png)
+[![Enhanced-VXLAN-1]({{ site.baseurl }}/img/2013/05/enhanced-vxlan-12.png?w=550)]({{ site.baseurl }}/img/2013/05/enhanced-vxlan-12.png)
 
 In the above example, all VMs reside in the same VXLAN. VM A sends a broadcast packet which reaches the local VEM / VTEP. In the original release of VXLAN, the VTEP would use the underlying IP multicast transport to ensure the broadcast packet reaches each of the VTEPs. With enhanced VXLAN, we are replicating the packet locally and sending a copy of the packet directly to the other VEMs / VTEPs. Note that if there were another host containing VMs not in our VXLAN, the broadcast packet would not be sent to that VTEP.
 
@@ -33,7 +33,7 @@ What about unknown unicast traffic? How we handle this type of traffic depends o
 
 The first of the unicast modes is "Flood and Learn" mode; in this mode, we use head-end replication as described above to ensure that broadcast and multicast packets reach their destination, thus doing away with the requirement for IP multicast in the underlying transport network. However, in this mode we continue to learn MAC addresses via the "flood and learn" method - essentially nothing has changed in terms of how we learn MACs on our VEMs / VTEPs. For example:
 
-[![Enhanced-VXLAN-2](http://adamraffe.files.wordpress.com/2013/05/enhanced-vxlan-22.png)](http://adamraffe.files.wordpress.com/2013/05/enhanced-vxlan-22.png)
+[![Enhanced-VXLAN-2]({{ site.baseurl }}/img/2013/05/enhanced-vxlan-22.png)]({{ site.baseurl }}/img/2013/05/enhanced-vxlan-22.png)
 
 When VTEP B receives the encapsulated VXLAN packet from VTEP A, it decapsulates it and learns that the address of VM A lives behind VTEP A (172.16.1.1). This is identical to how we learn MACs with the 'original' version of VXLAN.
 

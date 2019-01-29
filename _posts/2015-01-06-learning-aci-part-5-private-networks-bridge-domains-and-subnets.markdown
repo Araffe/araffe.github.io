@@ -39,7 +39,7 @@ In ACI, a private network - sometimes known as a _context_ - is used to define a
 
 A private network is defined under a tenant, under the 'Networking' side menu:
 
-[![Private-Networks](https://adamraffe.files.wordpress.com/2015/01/private-networks.png)](https://adamraffe.files.wordpress.com/2015/01/private-networks.png)
+[![Private-Networks]({{ site.baseurl }}/img/2015/01/private-networks.png)]({{ site.baseurl }}/img/2015/01/private-networks.png)
 
 There are a number of policies you can associate with a private network, including OSPF and BGP timers, as well as how long end points should be retained. One interesting option within the private network configuration is the Enforced / Unenforced option. The default option here is 'Enforced' - this means that all security rules (contracts) associated with this private network will be enforced. It is however possible to disable this (Unenforced) which means that contracts will _not_ be enforced within this private network. This is like having an ACL with 'permit any' at the end of it, which of course means that inter-EPG communication will be allowed without the need for contracts.
 
@@ -49,7 +49,7 @@ Private networks are fairly to easy to understand, so what about bridge domains?
 
 When you define a BD (from the same 'Networking' side menu we used to define our Private Network), a number of forwarding options are available if you select the 'custom' option from the drop down menu:
 
-[![BD Options](https://adamraffe.files.wordpress.com/2015/01/bd-options.png)](https://adamraffe.files.wordpress.com/2015/01/bd-options.png)
+[![BD Options]({{ site.baseurl }}/img/2015/01/bd-options.png)]({{ site.baseurl }}/img/2015/01/bd-options.png)
 
 Let's look at these options in more detail:
 
@@ -74,7 +74,7 @@ A bridge domain is always associated with a private network - you'll need to sel
 
 When you create a bridge domain, you have the option of defining a _subnet _under the BD:
 
-[![Subnet](https://adamraffe.files.wordpress.com/2015/01/subnet.png)](https://adamraffe.files.wordpress.com/2015/01/subnet.png)
+[![Subnet]({{ site.baseurl }}/img/2015/01/subnet.png)]({{ site.baseurl }}/img/2015/01/subnet.png)
 
 When you define a subnet under a BD, you are creating an anycast gateway - that is, a gateway address for a subnet that potentially exists on every leaf node (if required). In the traditional world, think of this as an SVI interface that can exist on more than one node with the same address.
 

@@ -28,11 +28,11 @@ To get started with the NX-API, you first need to enable the feature on the swit
 
 The best way to get up to speed with how the NX-API works is through the built in _sandbox_ environment - this is a web-based interface that allows you to test commands and the resulting output. You can get to the sandbox simply by browsing to the management IP address of the switch:
 
-[![NX-API-Sandbox](http://adamraffe.files.wordpress.com/2013/11/nx-api-sandbox.png?w=550)](http://adamraffe.files.wordpress.com/2013/11/nx-api-sandbox.png)
+[![NX-API-Sandbox]({{ site.baseurl }}/img/2013/11/nx-api-sandbox.png?w=550)]({{ site.baseurl }}/img/2013/11/nx-api-sandbox.png)
 
 On the left hand side of the sandbox screen, you can select the type of command you want to send (more on that in a moment), the output format (XML or JSON) and the actual command you want to send (in the above screen we are sending "show version"). On the right, we can see the output of the command returned to us in XML format. What if you prefer the output in JSON format? No problem, you just change the output format:
 
-[![JSON-Output](http://adamraffe.files.wordpress.com/2013/11/json-output.png?w=550)](http://adamraffe.files.wordpress.com/2013/11/json-output.png)
+[![JSON-Output]({{ site.baseurl }}/img/2013/11/json-output.png?w=550)]({{ site.baseurl }}/img/2013/11/json-output.png)
 
 **What input does the NX-API expect to see?**
 

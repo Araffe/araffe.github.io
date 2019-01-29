@@ -18,7 +18,7 @@ One of the interesting design considerations when deploying FabricPath is where 
 
 As you may know, vPC+ modifies the behaviour of HSRP to allow either vPC+ peer to route traffic locally. This is certainly useful functionality in a FabricPath environment as it allows dual active gateways, however what if you want your default gateways on the Spine layer (where there are no directly connected STP devices, and therefore no real need to run vPC+)? What you end up with in this case is vPC+ running on your Spine switches in order to gain access to the dual active HSRP forwarding, _but with no actual vPC ports on the switch_. This works fine - but most people would prefer not to have vPC+ running on their Spine switches if they can avoid doing so.
 
-[![Anycast-HSRP-1](http://adamraffe.files.wordpress.com/2013/08/anycast-hsrp-1.png)](http://adamraffe.files.wordpress.com/2013/08/anycast-hsrp-1.png)<!-- more -->
+[![Anycast-HSRP-1]({{ site.baseurl }}/img/2013/08/anycast-hsrp-1.png)]({{ site.baseurl }}/img/2013/08/anycast-hsrp-1.png)<!-- more -->
 
 The other drawback of using vPC+ is that you can only have two active gateways - only HSRP peers in 'active' or 'standby' state will forward traffic, with peers in 'listening' state unable to forward. So in larger FabricPath networks where you have multiple Spine switches, lots of bandwidth, many different layer 2 paths, etc, you are still limited to two active L3 gateways.
 
@@ -47,7 +47,7 @@ Note that HSRP version 2 must be configured on the interface for Anycast HSRP to
 
 Let's say we now have four spine switches in our network and want to run HSRP across all four of them. The resulting topology looks like this:
 
-[![Anycast-HSRP-2](http://adamraffe.files.wordpress.com/2013/08/anycast-hsrp-2.png?w=550)](http://adamraffe.files.wordpress.com/2013/08/anycast-hsrp-2.png)
+[![Anycast-HSRP-2]({{ site.baseurl }}/img/2013/08/anycast-hsrp-2.png?w=550)]({{ site.baseurl }}/img/2013/08/anycast-hsrp-2.png)
 
 In the above scenario, the two leaf switches (S10 and S20) learn that the HSRP VMAC is accessible via the switch ID S102 (the Anycast switch ID). FabricPath IS-IS then calculates that this switch ID is accessible via any of the spine switches (S1, S2, S3 or S4). Note also that all four spine nodes (even the ones in HSRP listening mode) are actively forwarding L3 traffic.
 

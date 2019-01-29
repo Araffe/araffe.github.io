@@ -73,13 +73,13 @@ In the APIC GUI, click on the **Fabric** tab and then the **Inventory** sub-menu
 
 OK, so we now have a single leaf node registered - how do we discover the rest of our network? Well, once you have registered the first node, you should magically start to see additional switches (spine nodes) pop up on the Fabric Membership page. Go ahead and register these in the same way, which in turn will lead to the remaining switches appearing and available for registration. What you should eventually end up with is something that looks like this:
 
-[![Fabric-Membership](https://adamraffe.files.wordpress.com/2014/11/fabric-membership.png)](https://adamraffe.files.wordpress.com/2014/11/fabric-membership.png)
+[![Fabric-Membership]({{ site.baseurl }}/img/2014/11/fabric-membership.png)]({{ site.baseurl }}/img/2014/11/fabric-membership.png)
 
 Now at this point, we have our full switching topology discovered....but we still only have one APIC. As your other APICs are very likely to be connected to different leaf switches, we needed to wait until those switches were discovered before we could initialise the remaining APICs and form the cluster. So you can now run the setup script on the other APICs, using the same basic info as before, but making sure you use different controller IDs, management IP address, etc.
 
 Now that your remaining APICs are up and running, your fabric is pretty much ready to go - if you go back to the **Fabric | Inventory **section in the APIC GUI and click on **Topology**, you should see a graphical representation of your fabric:
 
-[![Screen Shot 2014-11-28 at 08.41.48](https://adamraffe.files.wordpress.com/2014/11/screen-shot-2014-11-28-at-08-41-48.png)](https://adamraffe.files.wordpress.com/2014/11/screen-shot-2014-11-28-at-08-41-48.png)
+[![Screen Shot 2014-11-28 at 08.41.48]({{ site.baseurl }}/img/2014/11/screen-shot-2014-11-28-at-08-41-48.png)]({{ site.baseurl }}/img/2014/11/screen-shot-2014-11-28-at-08-41-48.png)
 
 Before you go any further, you may wish to configure your switching nodes with management IP addresses so you can SSH to them directly - do this by clicking on the **Tenants** tab and then the 'Mgmt' tenant. On the left hand side you'll find **Node Management Addresses**, which will allow you to configure management IPs for every node in the fabric. Also under the Mgmt tenant, you'll find **Out-Of-Band Contracts** listed under the **Security Policies** menu. You'll need to configure at least one contract here to allow traffic into your OOB management interfaces. Finally, under **Node Management EPGs**, you can add the OOB contract to your OOB EPG.
 
@@ -97,6 +97,6 @@ Now that we've looked at how to discover our fabric, it would be nice to underst
 
 5) Once the first leaf node has been discovered and registered by the APIC, a similar process is followed for the remaining devices in the fabric.
 
-[![Discovery1](https://adamraffe.files.wordpress.com/2014/12/discovery1.png)](https://adamraffe.files.wordpress.com/2014/12/discovery1.png)
+[![Discovery1]({{ site.baseurl }}/img/2014/12/discovery1.png)]({{ site.baseurl }}/img/2014/12/discovery1.png)
 
 Thanks for reading - the next step is to have a look at the APIC and get familiar with it. Check out [part 3](http://wp.me/p34R3O-bW) for this!

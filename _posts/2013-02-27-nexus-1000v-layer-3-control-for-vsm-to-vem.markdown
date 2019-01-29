@@ -40,10 +40,10 @@ The second choice you need to make is whether to use the existing management VMK
 
 If you choose to use the management VMK interface (normally VMK0) for layer 3 control, that VMK will need to be moved over to the Nexus 1000V, where it will sit 'behind' the VEM, as follows:
 
-[![L3-VSM-VEM](http://adamraffe.files.wordpress.com/2013/02/l3-vsm-vem.png)](http://adamraffe.files.wordpress.com/2013/02/l3-vsm-vem.png)
+[![L3-VSM-VEM]({{ site.baseurl }}/img/2013/02/l3-vsm-vem.png)]({{ site.baseurl }}/img/2013/02/l3-vsm-vem.png)
 
 Bear in mind that the VSM will not 'see' the VEM (i.e. it won't appear in the output of 'sh mod') until the VMK interface is moved to the VEM. This is definitely the simpler of the two options and it cuts down on some extra admin as you don't have create a second VMK interface. However some people prefer having their ESXi management VMK interface 'out of band' - in other words, they prefer to have the management VMK interface remain on a standard vSwitch. This leads us to our second option:
 
-[![L3-VSM-VEM2](http://adamraffe.files.wordpress.com/2013/02/l3-vsm-vem2.png)](http://adamraffe.files.wordpress.com/2013/02/l3-vsm-vem2.png)
+[![L3-VSM-VEM2]({{ site.baseurl }}/img/2013/02/l3-vsm-vem2.png)]({{ site.baseurl }}/img/2013/02/l3-vsm-vem2.png)
 
 This option keeps VMK0 (ESXi mgmt) on the standard vSwitch0, while a new VMK interface (VMK1) is created and used for L3 control between the VSM and VEM. If you choose this option, you may need to configure static routes on the ESXi host if the two VMK interfaces are in different VLANs - for example, a default gateway would be configured via VMK0, while a more specific static route would be configured via VMK1 towards the VSM IP address.

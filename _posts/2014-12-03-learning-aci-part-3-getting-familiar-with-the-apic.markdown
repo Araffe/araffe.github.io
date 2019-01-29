@@ -23,7 +23,7 @@ Hello again! Hopefully you're back after reading parts [one](http://wp.me/p34R3O
 
 After initialising your APICs, you can browse to any one of the APIC out-of-band IP addresses (there is no 'cluster' IP address with the APIC) and log on. The first thing you will see is the main 'dashboard' screen, which looks something like this:
 
-[![Screen Shot 2014-12-02 at 19.58.45](https://adamraffe.files.wordpress.com/2014/12/screen-shot-2014-12-02-at-19-58-45.png)](https://adamraffe.files.wordpress.com/2014/12/screen-shot-2014-12-02-at-19-58-45.png)
+[![Screen Shot 2014-12-02 at 19.58.45]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-19-58-45.png)]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-19-58-45.png)
 
 At the top, we get an overall view of the system health - on my fabric, I have an overall health score of 91, so that tells me that there is something needing attention. Further down, we can see a 'node' view which shows the individual switching nodes in the fabric and their corresponding health scores. From here, I can see that one of my nodes has a health score of 87, so that is a good place to start in investigating my issue. Clicking on the health score in this section takes you directly to a more detailed view of the node in question, where you can investigate faults and other relevant information.
 
@@ -38,7 +38,7 @@ Finally, on the bottom right we have the APIC cluster health. In the example, I 
 
 Moving along to the Tenants tab at the top of the page - after clicking here, you'll see a screen similar to the following:
 
-[![Screen Shot 2014-12-02 at 20.14.39](https://adamraffe.files.wordpress.com/2014/12/screen-shot-2014-12-02-at-20-14-39.png)](https://adamraffe.files.wordpress.com/2014/12/screen-shot-2014-12-02-at-20-14-39.png)
+[![Screen Shot 2014-12-02 at 20.14.39]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-20-14-39.png)]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-20-14-39.png)
 
 In the 'sub-menu' under the main Tenants tab, you'll see a list of the most commonly used tenants. Under here, you will configure application profiles (EPGs, etc), networking (private networks, bridge domains, etc), security policies (contracts and filters) as well as a host of other items relating to troubleshooting and monitoring (SPAN and atomic counters for example). If you are using automated services insertion, that will also be configured under the tenant section.
 
@@ -48,19 +48,19 @@ The Fabric tab is used for a number of purposes: viewing fabric inventory inform
 
 Clicking on the inventory sub-menu and then **Topology**, you'll see a graphic representation of the entire fabric:
 
-[![Screen Shot 2014-12-02 at 20.25.27](https://adamraffe.files.wordpress.com/2014/12/screen-shot-2014-12-02-at-20-25-27.png)](https://adamraffe.files.wordpress.com/2014/12/screen-shot-2014-12-02-at-20-25-27.png)
+[![Screen Shot 2014-12-02 at 20.25.27]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-20-25-27.png)]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-20-25-27.png)
 
 Right-clicking on any of the switches or APICs in the picture will allow you to perform some basic tasks such as decommissioning the node or configuring interfaces. Double clicking the node will take you to a more detailed view and allow you to perform further tasks.
 
 If we now expand the 'Pod 1' menu item on the left and then expand one of the nodes, we can see a whole host of information about the device in question. For example, we can see information about the chassis, Supervisor, linecards, power supplies for the device, interface information, protocol information (BGP, IS-IS, OSPF and more) and processes running. In the following example, I'm looking at the IS-IS routes present on the fabric:
 
-[![Screen Shot 2014-12-02 at 20.33.34](https://adamraffe.files.wordpress.com/2014/12/screen-shot-2014-12-02-at-20-33-34.png)](https://adamraffe.files.wordpress.com/2014/12/screen-shot-2014-12-02-at-20-33-34.png)
+[![Screen Shot 2014-12-02 at 20.33.34]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-20-33-34.png)]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-20-33-34.png)
 
 **The 'VM Networking' Tab**
 
 VM Networking is where we configure 'VMM domains' - essentially, this is the integration with the virtualisation / hypervisor layer. I'll be covering this in more detail in a later post, but assuming you have a VMM domain configured, from here you can view info such as ESXi hosts, virtual machines running on those hosts and the physical interfaces in use. You can also see info about the distributed virtual switch being used and any port groups that have been created.
 
-[![Screen Shot 2014-12-02 at 20.39.24](https://adamraffe.files.wordpress.com/2014/12/screen-shot-2014-12-02-at-20-39-24.png)](https://adamraffe.files.wordpress.com/2014/12/screen-shot-2014-12-02-at-20-39-24.png)
+[![Screen Shot 2014-12-02 at 20.39.24]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-20-39-24.png)]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-20-39-24.png)
 
 **The 'L4-L7 Services' Tab**
 
@@ -76,13 +76,13 @@ So far we've only looked at the GUI, so those of you who are interested in using
 
 The first of these tools is the **API Inspector** - you can get to this by clicking on the 'Welcome' button on the top right of the screen.
 
-[![Screen Shot 2014-12-02 at 20.50.27](https://adamraffe.files.wordpress.com/2014/12/screen-shot-2014-12-02-at-20-50-27.png)](https://adamraffe.files.wordpress.com/2014/12/screen-shot-2014-12-02-at-20-50-27.png)
+[![Screen Shot 2014-12-02 at 20.50.27]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-20-50-27.png)]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-20-50-27.png)
 
 What this tool does is display the API calls made whenever you perform a task in the GUI. This is extremely useful because you can carry out a task in the GUI, capture it using the API Inspector and then use the JSON output to help you build your own scripts.
 
 The second tool is the ability to 'save' the XML from almost any object in the GUI. Right clicking on an object (for example an application profile, EPG, Bridge Domain, etc) and selecting 'Save As...' will allow you to save the XML associated with that object to a local file. Again, you can use this XML to become familiar with the API, use in your own scripts, and so on.
 
-[![Screen Shot 2014-12-02 at 20.55.53](https://adamraffe.files.wordpress.com/2014/12/screen-shot-2014-12-02-at-20-55-53.png)](https://adamraffe.files.wordpress.com/2014/12/screen-shot-2014-12-02-at-20-55-53.png)
+[![Screen Shot 2014-12-02 at 20.55.53]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-20-55-53.png)]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-20-55-53.png)
 
 That's it for now - hopefully you've enjoyed this quick tour around the APIC. Now that you're familiar with the basics, we can move on to the next steps - understanding application profiles, EPGs, contracts and filters. Check out [part 4](http://adamraffe.com/2015/01/02/learning-aci-part-4-application-profiles-epgs-contracts-and-filters/) for more on that.
 

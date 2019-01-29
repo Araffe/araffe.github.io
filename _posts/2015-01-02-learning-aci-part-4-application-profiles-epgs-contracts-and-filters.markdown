@@ -22,11 +22,11 @@ You'll hopefully be aware by now that ACI introduces a number of new concepts th
 
 Let's imagine you have a standard three-tiered type of application (I'm aware that this is a rather overused example, but it serves its purpose in this case):
 
-[![3-tiered-app](https://adamraffe.files.wordpress.com/2015/01/3-tiered-app.png)](https://adamraffe.files.wordpress.com/2015/01/3-tiered-app.png)
+[![3-tiered-app]({{ site.baseurl }}/img/2015/01/3-tiered-app.png)]({{ site.baseurl }}/img/2015/01/3-tiered-app.png)
 
 Within each of our application tiers, we have a number of 'end points' - we don't really care too much what those are (bare metal, VMs, etc). The important thing is that these end points all require the same policy to be applied. If we can identify which group these end points need to be part of, we can create the corresponding EPGs within ACI:
 
-[![3-tiered-epg](https://adamraffe.files.wordpress.com/2015/01/3-tiered-epg.png)](https://adamraffe.files.wordpress.com/2015/01/3-tiered-epg.png)
+[![3-tiered-epg]({{ site.baseurl }}/img/2015/01/3-tiered-epg.png)]({{ site.baseurl }}/img/2015/01/3-tiered-epg.png)
 
 How do we define which end points reside in which EPG? That can be done either statically or dynamically and depends somewhat on whether we are talking about bare metal hosts or virtual machines. If these are VMs, then ACI can integrate closely with the virtual machine manager (such as vCenter), with the process of attaching a VM to a network resulting in that VM becoming part of the desired EPG. Now that we have our EPGs defined and end points residing within them, what comes next? At this point, there are two important concepts to understand:
 
@@ -40,15 +40,15 @@ Now that we know these rules, it follows that we need to put something extra in 
 
 What does a contract do? Essentially, it is a policy construct defining the potential communication between the EPGs on the system. A contract can be very restrictive (for example, allowing only one port), or it can be completely open ("permit any") depending on your requirements.
 
-[![Contracts](https://adamraffe.files.wordpress.com/2015/01/contracts.png)](https://adamraffe.files.wordpress.com/2015/01/contracts.png)
+[![Contracts]({{ site.baseurl }}/img/2015/01/contracts.png)]({{ site.baseurl }}/img/2015/01/contracts.png)
 
 A contract will refer to one or more _filters_. The filter is the construct used to actually define the specific protocols and ports required between EPGs. In the following example, I am creating a filter with a single entry - HTTP:
 
-[![Filter-example](https://adamraffe.files.wordpress.com/2015/01/filter-example.png)](https://adamraffe.files.wordpress.com/2015/01/filter-example.png)
+[![Filter-example]({{ site.baseurl }}/img/2015/01/filter-example.png)]({{ site.baseurl }}/img/2015/01/filter-example.png)
 
 This filter can now be referenced when creating a contract - in this case, the filter is a 'subject' that gets defined under the contract:
 
-[![Contract-Subject](https://adamraffe.files.wordpress.com/2015/01/contract-subject.png)](https://adamraffe.files.wordpress.com/2015/01/contract-subject.png)
+[![Contract-Subject]({{ site.baseurl }}/img/2015/01/contract-subject.png)]({{ site.baseurl }}/img/2015/01/contract-subject.png)
 
 Note that you can apply the contract to both directions if bi-directional communication is required between EPGs.
 
@@ -57,17 +57,17 @@ Note that you can apply the contract to both directions if bi-directional commun
 
 OK, so we have some EPGs defined and the contracts / filters we need to communicate between them. We now need some way of tying all of this together - an _Application Profile_ is simply a collection of EPGs and the policies needed to communicate between them:
 
-[![App-Profile](https://adamraffe.files.wordpress.com/2015/01/app-profile.png)](https://adamraffe.files.wordpress.com/2015/01/app-profile.png)
+[![App-Profile]({{ site.baseurl }}/img/2015/01/app-profile.png)]({{ site.baseurl }}/img/2015/01/app-profile.png)
 
 During the process of creating an application profile and its associated EPGs, you will associate one or more contracts with the EPGs that you create. When a contract is associated with an EPG, that EPG can either _provide_ or _consume_ the contract. Let's imagine our "Web" EPG is providing a service using HTTP (which seems perfectly reasonable), and that this service needs to be accessed from the "App" EPG. In that case, the "Web" EPG would _provide_ a contract (and its associated filter) allowing HTTP. The "App" EPG would _consume_ the very same contract. The APIC actually gives us a nice graphical representation of this relationship:
 
-[![Provider-Consume](https://adamraffe.files.wordpress.com/2015/01/provider-consume.png)](https://adamraffe.files.wordpress.com/2015/01/provider-consume.png)
+[![Provider-Consume]({{ site.baseurl }}/img/2015/01/provider-consume.png)]({{ site.baseurl }}/img/2015/01/provider-consume.png)
 
 **Contract Scope**
 
 When defining a contract, you can specify the _scope_ of that contract - for example, Private Network, Application Profile, Tenant or Global. The scope of a contract defines the level of policy enforcement between the various entities within ACI. As an example, let's say we create a single contract called "web-to-db". Now let's say we create two application profiles (app1 and app2), with the EPGs within those app profiles providing and consuming our single contract, as shown here:
 
-[![Contract-Scope](https://adamraffe.files.wordpress.com/2015/01/contract-scope.png)](https://adamraffe.files.wordpress.com/2015/01/contract-scope.png)
+[![Contract-Scope]({{ site.baseurl }}/img/2015/01/contract-scope.png)]({{ site.baseurl }}/img/2015/01/contract-scope.png)
 
 If our contract scope is set to "application profile", this means that communication is _not_ permitted between application profiles (for example, no communication between 'App1-Web' and 'App2-Web'). If we were to set the scope of our contract to 'Private Network', then communication would be possible between all four EPGs (assuming everything is part of one private network).
 

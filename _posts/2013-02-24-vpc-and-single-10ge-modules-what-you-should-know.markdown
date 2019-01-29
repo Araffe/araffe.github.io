@@ -14,15 +14,15 @@ categories:
 
 It's often a good recommendation to use multiple linecard modules in a switch chassis - this makes it possible to spread port-channels across linecards so if one fails, convergence times are kept to a minimum. If you are using vPC on the Nexus 7000, this recommendation becomes even more important. Why? Let's imagine we have a vPC setup with two Nexus 7000s and a downstream switch, connected via vPC. Each Nexus 7000 has a single M1 10GE linecard (used for both the peer-link and the upstream connections to the core), plus a single M1 1GE linecard (used to connect to the downstream switch, plus the Peer-Keepalive link):
 
-[![vPC-single-10GE-mod-1](http://adamraffe.files.wordpress.com/2013/02/vpc-single-10ge-mod-11.png?w=550)](http://adamraffe.files.wordpress.com/2013/02/vpc-single-10ge-mod-11.png)
+[![vPC-single-10GE-mod-1]({{ site.baseurl }}/img/2013/02/vpc-single-10ge-mod-11.png?w=550)]({{ site.baseurl }}/img/2013/02/vpc-single-10ge-mod-11.png)
 
 <!-- more -->Let's also assume N7K-1 is the primary vPC peer. Now let's see what happens if we lose one of the M1 10GE modules in N7K-1:
 
-[![vPC-single-10GE-mod-2](http://adamraffe.files.wordpress.com/2013/02/vpc-single-10ge-mod-2.png?w=550)](http://adamraffe.files.wordpress.com/2013/02/vpc-single-10ge-mod-2.png)
+[![vPC-single-10GE-mod-2]({{ site.baseurl }}/img/2013/02/vpc-single-10ge-mod-2.png?w=550)]({{ site.baseurl }}/img/2013/02/vpc-single-10ge-mod-2.png)
 
 What has happened here? Because the only available 10GE linecard in N7K-1 has failed, we have lost both the vPC Peer-Link and all our uplinks to the core from this switch. However, the M1 1GE card is still available, which means that both the vPC Peer-Keepalive and the vPC member port to the access switch are still up. Anyone familiar with vPC will at this point know that if the Peer-Link is down, but the Peer-Keepalive is still available, **the secondary vPC peer will disable its own vPC member links, **as follows:
 
-[![vPC-single-10GE-mod-3](http://adamraffe.files.wordpress.com/2013/02/vpc-single-10ge-mod-3.png?w=550)](http://adamraffe.files.wordpress.com/2013/02/vpc-single-10ge-mod-3.png)
+[![vPC-single-10GE-mod-3]({{ site.baseurl }}/img/2013/02/vpc-single-10ge-mod-3.png?w=550)]({{ site.baseurl }}/img/2013/02/vpc-single-10ge-mod-3.png)
 
 Hopefully the issue with this is clear to see: the access switch has only one available path - via N7K-1. However N7K-1 has no available links to anywhere else in the network, therefore our access switch is now completely isolated.
 

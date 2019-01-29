@@ -16,17 +16,17 @@ What is the ASA 1000V? It is a virtualised edge firewall that runs in conjunctio
 
 An ASA 1000V has four "physical" interfaces - 'Inside', 'Outside', 'Management' and 'Failover':
 
-[![ASA1K-interfaces](http://adamraffe.files.wordpress.com/2013/02/asa1k-interfaces1.jpg)](http://adamraffe.files.wordpress.com/2013/02/asa1k-interfaces1.jpg)
+[![ASA1K-interfaces]({{ site.baseurl }}/img/2013/02/asa1k-interfaces1.jpg)]({{ site.baseurl }}/img/2013/02/asa1k-interfaces1.jpg)
 
 <!-- more -->Of course, these aren't really physical interfaces; they are virtual interfaces residing on a VM, and each of these interfaces maps directly to a port-profile that needs to be configured on the Nexus 1000V before the ASA is installed. To refresh your memory, a port profile is a collection of interface level commands on the Nexus 1000V which can be applied to one or more virtual Ethernet interfaces connecting to a VM. Logically, the ASA 1000V virtual machine is sitting 'behind' the Nexus 1000V VEM, and the mapping of port-profiles to ASA 1000V interfaces looks like this:
 
-[![ASA1K-Port-Profiles](http://adamraffe.files.wordpress.com/2013/02/asa1k-port-profiles1.jpg?w=710)](http://adamraffe.files.wordpress.com/2013/02/asa1k-port-profiles1.jpg)
+[![ASA1K-Port-Profiles]({{ site.baseurl }}/img/2013/02/asa1k-port-profiles1.jpg?w=710)]({{ site.baseurl }}/img/2013/02/asa1k-port-profiles1.jpg)
 
 An important point to remember about the ASA 1000V is that in the initial release - 8.7(1) - only two data interfaces are supported (Inside and Outside). One of these interfaces (the Inside interface) must be designated as the 'Service' interface - this interface sends and receives vPath tagged traffic to and from the Nexus 1000V. I will (hopefully) explore vPath in more detail in a future post, but essentially this is a mechanism which allows the Nexus 1000V to intercept traffic and redirect it to a virtual service (which in our case is the ASA 1000V).
 
 So how does the ASA 1000V actually protect virtual machines? For this, we need to introduce the concept of a 'security profile'. A security profile is essentially a collection of security policies - the difference here is that the security profile gets assigned to a set of protected VMs through the use of Nexus 1000V port profiles. The following diagram shows how this looks:
 
-[![ASA1K-Security-Profiles](http://adamraffe.files.wordpress.com/2013/02/asa1k-security-profiles2.jpg)](http://adamraffe.files.wordpress.com/2013/02/asa1k-security-profiles2.jpg)
+[![ASA1K-Security-Profiles]({{ site.baseurl }}/img/2013/02/asa1k-security-profiles2.jpg)]({{ site.baseurl }}/img/2013/02/asa1k-security-profiles2.jpg)
 
 A few things are going on here:
 
@@ -40,6 +40,6 @@ A few things are going on here:
 
 One slight area of confusion here is that although the 'Inside' interface of the ASA 1000V is on the same VLAN (VLAN 10 in this case) as the vNICs of the protected VMs, the Inside interface sits in a different N1KV port-profile from the protected VMs. To complete the picture, the following diagram shows how the port-profiles for the protected VMs would be configured on the Nexus 1000V:
 
-[![N1KV-Port-Profile](http://adamraffe.files.wordpress.com/2013/02/n1kv-port-profile.jpg)](http://adamraffe.files.wordpress.com/2013/02/n1kv-port-profile.jpg)
+[![N1KV-Port-Profile]({{ site.baseurl }}/img/2013/02/n1kv-port-profile.jpg)]({{ site.baseurl }}/img/2013/02/n1kv-port-profile.jpg)
 
 One other point worth mentioning: traffic through the ASA 1000V can only flow between the Inside and Outside interfaces; traffic cannot flow between multiple security profiles which both sit behind the Inside interface. For that, you would need to use a VM level firewall product such as Virtual Security Gateway (VSG).
