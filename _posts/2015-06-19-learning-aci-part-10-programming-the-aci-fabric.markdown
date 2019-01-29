@@ -18,9 +18,7 @@ tags:
 
 Everything I've shown so far in this blog series has been focused on using the APIC GUI to achieve what we need. This is fine for small environments or for becoming familiar with ACI, but what if you need to configure 100 tenants, each with 50 EPGs, tens of private networks and bridge domains, multiple contracts to allow traffic and a L3 Outside or two thrown in? Configuring all of that through the GUI is clearly going to be massively time consuming and probably quite error prone, so we need to find a better way of doing things. ACI has a wide variety of programmability options that can be used to automate the provisioning of the fabric and its policies.
 
-<!-- more -->
-
-One particularly strong aspect of ACI programmability is how easy it is for network engineers to start interacting with the fabric in a programmatic manner. Speaking from personal experience, it's incredibly easy for someone with a 'traditional' network engineering background with limited development experience to start using the programmability features of ACI. With that said, let's take a look at some of the options we have around ACI programmability:
+One particularly strong aspect of ACI is how easy it is for network engineers to start interacting with the fabric in a programmatic manner. Speaking from personal experience, it's incredibly easy for someone with a 'traditional' network engineering background with limited development experience to start using the programmability features of ACI. With that said, let's take a look at some of the options we have around ACI programmability:
 
 
 

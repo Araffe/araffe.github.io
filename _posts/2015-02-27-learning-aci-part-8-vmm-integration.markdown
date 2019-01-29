@@ -20,25 +20,25 @@ Welcome to part 8 - let's quickly recap what we have covered so far in this seri
 
 
 	
-  * [Part 1](http://adamraffe.com/2014/12/03/learning-aci-part-1-overview/) introduced this series and discussed what topics would be covered, as well as a very brief overview of ACI.
+  * [Part 1](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-1-overview) introduced this series and discussed what topics would be covered, as well as a very brief overview of ACI.
 
 	
-  * In [part 2](http://adamraffe.com/2014/12/03/learning-aci-part-2-bringing-up-a-fabric/), I took a look at the fabric bring up process
+  * In [part 2](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-2-bringing-up-a-fabric), I took a look at the fabric bring up process
 
 	
-  * Next, we took a [tour through the APIC GUI](http://adamraffe.com/2014/12/03/learning-aci-part-3-getting-familiar-with-the-apic/) to get us familiar with the interface.
+  * Next, we took a [tour through the APIC GUI](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-3-getting-familiar-with-the-apic) to get us familiar with the interface.
 
 	
-  * [Part 4](http://adamraffe.com/2015/01/02/learning-aci-part-4-application-profiles-epgs-contracts-and-filters/) looked at some of the most important ACI constructs - app profiles, EPGs, contracts and filters.
+  * [Part 4](https://araffe.github.io/aci/nexus%209000/2015/01/02/learning-aci-part-4-application-profiles-epgs-contracts-and-filters) looked at some of the most important ACI constructs - app profiles, EPGs, contracts and filters.
 
 	
-  * We had a look at networking concepts in ACI in [part 5](http://adamraffe.com/2015/01/06/learning-aci-part-5-private-networks-bridge-domains-and-subnets/).
+  * We had a look at networking concepts in ACI in [part 5](https://araffe.github.io/aci/nexus%209000/2015/01/06/learning-aci-part-5-private-networks-bridge-domains-and-subnets).
 
 	
-  * In [part 6](http://adamraffe.com/2015/01/16/learning-aci-part-6-access-policies/), we discussed access policies and how they are used to provision ports.
+  * In [part 6](https://araffe.github.io/aci/nexus%209000/2015/01/16/learning-aci-part-6-access-policies), we discussed access policies and how they are used to provision ports.
 
 	
-  * Last time out in [part 7](http://adamraffe.com/2015/02/18/learning-aci-part-7-basic-connectivity/), I walked through setting up basic connectivity between two bare metal hosts.
+  * Last time out in [part 7](https://araffe.github.io/aci/nexus%209000/2015/02/18/learning-aci-part-7-basic-connectivity), I walked through setting up basic connectivity between two bare metal hosts.
 
 
 OK, so what's next? In this part, we'll discuss _VMM Integration_. What does this mean exactly? Firstly, VMM stands for _Virtual Machine Manager_ - in other words, we are talking about integration with a VM management system such as VMware vCenter, Microsoft SCVMM and so on. At the time of writing this post, ACI supports integration with vCenter (others will be supported later), so this is what we'll concentrate on here. I should also point out that we could also use the Cisco _Application Virtual Switch_ (AVS) to achieve this integration, but I'm going to focus on using the regular VMware distributed virtual switch in this post.<!-- more -->

@@ -12,7 +12,7 @@ categories:
 - Nexus 9000
 ---
 
-So far in this series, we've covered some basic concepts in ACI, including [fabric bringup](http://adamraffe.com/2014/12/03/learning-aci-part-2-bringing-up-a-fabric/), [APIC familiarisation](http://adamraffe.com/2014/12/03/learning-aci-part-3-getting-familiar-with-the-apic/), [application profiles / EPGs / contracts](http://adamraffe.com/2015/01/02/learning-aci-part-4-application-profiles-epgs-contracts-and-filters/) as well as some of the [networking concepts in ACI](http://adamraffe.com/2015/01/06/learning-aci-part-5-private-networks-bridge-domains-and-subnets/). At some point though, you'll want to actually start attaching hosts and other devices to the fabric - in order to do this, you'll need to get familiar with the concept of _access policies._
+So far in this series, we've covered some basic concepts in ACI, including [fabric bringup](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-2-bringing-up-a-fabric), [APIC familiarisation](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-3-getting-familiar-with-the-apic), [application profiles / EPGs / contracts](https://araffe.github.io/aci/nexus%209000/2015/01/02/learning-aci-part-4-application-profiles-epgs-contracts-and-filters) as well as some of the [networking concepts in ACI](https://araffe.github.io/aci/nexus%209000/2015/01/06/learning-aci-part-5-private-networks-bridge-domains-and-subnets). At some point though, you'll want to actually start attaching hosts and other devices to the fabric - in order to do this, you'll need to get familiar with the concept of _access policies._
 
 [![Access Policies]({{ site.baseurl }}/img/2015/01/access-policies.png)]({{ site.baseurl }}/img/2015/01/access-policies.png)
 

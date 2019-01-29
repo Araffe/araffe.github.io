@@ -14,7 +14,7 @@ tags:
 - APIC
 ---
 
-In this post, we'll take a closer look at some of the most important constructs within the ACI solution - application profiles, End Point Groups (EPGs), contracts and filters. Hopefully you've taken a look at the other parts in this series - in [part 1](http://adamraffe.com/2014/12/03/learning-aci-part-1-overview/), I gave a brief overview of ACI and what I would be covering in the series. [Part 2](http://adamraffe.com/2014/12/03/learning-aci-part-2-bringing-up-a-fabric/) discussed the fabric bring-up process, with [part 3](http://adamraffe.com/2014/12/03/learning-aci-part-3-getting-familiar-with-the-apic/) giving a short tour of the APIC.<!-- more -->
+In this post, we'll take a closer look at some of the most important constructs within the ACI solution - application profiles, End Point Groups (EPGs), contracts and filters. Hopefully you've taken a look at the other parts in this series - in [part 1](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-1-overview), I gave a brief overview of ACI and what I would be covering in the series. [Part 2](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-2-bringing-up-a-fabric) discussed the fabric bring-up process, with [part 3](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-3-getting-familiar-with-the-apic) giving a short tour of the APIC.<!-- more -->
 
 **End Point Groups**
 
@@ -71,4 +71,4 @@ When defining a contract, you can specify the _scope_ of that contract - for exa
 
 If our contract scope is set to "application profile", this means that communication is _not_ permitted between application profiles (for example, no communication between 'App1-Web' and 'App2-Web'). If we were to set the scope of our contract to 'Private Network', then communication would be possible between all four EPGs (assuming everything is part of one private network).
 
-That's it for this instalment - next up, we'll look at some of the networking elements within ACI, such as bridge domains and private networks (contexts). Part 5 is [here](http://adamraffe.com/2015/01/06/learning-aci-part-5-private-networks-bridge-domains-and-subnets/).
+That's it for this instalment - next up, we'll look at some of the networking elements within ACI, such as bridge domains and private networks (contexts). Part 5 is [here](https://araffe.github.io/aci/nexus%209000/2015/01/06/learning-aci-part-5-private-networks-bridge-domains-and-subnets).

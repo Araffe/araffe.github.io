@@ -26,8 +26,6 @@ ACI has the ability to divide the fabric up into multiple tenants, or multiple V
   2. Security rules must be in place to allow communication between the EPGs in question (as is always the case with ACI).
 
 
-<!-- more -->
-
 The question is, what is the correct way to configure this type of connectivity? I've seen quite a bit of confusion around this, particularly when it comes to deciding where to configure subnets (at the bridge domain level or EPG level), so hopefully I can provide a bit of clarity in this post. I'm going to cover three main scenarios:
 
 	

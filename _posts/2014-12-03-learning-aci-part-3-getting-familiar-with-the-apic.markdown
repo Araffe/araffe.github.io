@@ -15,7 +15,7 @@ tags:
 - GUI
 ---
 
-Hello again! Hopefully you're back after reading parts [one](http://wp.me/p34R3O-bk) and [two](http://wp.me/p34R3O-bw) of this series - in the first post, I covered a basic introduction to ACI and then in the last post, we looked at how the fabric initialisation and discovery process works. After the incredible excitement of building an ACI fabric, what do we do with it? Well, if you've never seen what an APIC looks like before, in this post we'll have a look around the APIC and start to find our way around the GUI.
+Hello again! Hopefully you're back after reading parts [one](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-1-overview) and [two](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-2-bringing-up-a-fabric) of this series - in the first post, I covered a basic introduction to ACI and then in the last post, we looked at how the fabric initialisation and discovery process works. After the incredible excitement of building an ACI fabric, what do we do with it? Well, if you've never seen what an APIC looks like before, in this post we'll have a look around the APIC and start to find our way around the GUI.
 
 <!-- more -->
 
@@ -84,6 +84,6 @@ The second tool is the ability to 'save' the XML from almost any object in the G
 
 [![Screen Shot 2014-12-02 at 20.55.53]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-20-55-53.png)]({{ site.baseurl }}/img/2014/12/screen-shot-2014-12-02-at-20-55-53.png)
 
-That's it for now - hopefully you've enjoyed this quick tour around the APIC. Now that you're familiar with the basics, we can move on to the next steps - understanding application profiles, EPGs, contracts and filters. Check out [part 4](http://adamraffe.com/2015/01/02/learning-aci-part-4-application-profiles-epgs-contracts-and-filters/) for more on that.
+That's it for now - hopefully you've enjoyed this quick tour around the APIC. Now that you're familiar with the basics, we can move on to the next steps - understanding application profiles, EPGs, contracts and filters. Check out [part 4](https://araffe.github.io/aci/nexus%209000/2015/01/02/learning-aci-part-4-application-profiles-epgs-contracts-and-filters) for more on that.
 
 Thanks for reading!

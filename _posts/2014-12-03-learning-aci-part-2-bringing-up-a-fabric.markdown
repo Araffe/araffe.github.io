@@ -99,4 +99,4 @@ Now that we've looked at how to discover our fabric, it would be nice to underst
 
 [![Discovery1]({{ site.baseurl }}/img/2014/12/discovery1.png)]({{ site.baseurl }}/img/2014/12/discovery1.png)
 
-Thanks for reading - the next step is to have a look at the APIC and get familiar with it. Check out [part 3](http://wp.me/p34R3O-bW) for this!
+Thanks for reading - the next step is to have a look at the APIC and get familiar with it. Check out [part 3](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-3-getting-familiar-with-the-apic) for this!

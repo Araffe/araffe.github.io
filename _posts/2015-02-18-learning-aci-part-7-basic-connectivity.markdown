@@ -14,7 +14,7 @@ tags:
 - APIC
 ---
 
-Welcome back! In this instalment, I'll look at how to get two bare metal hosts talking to each other in the fabric. In the [last post](http://adamraffe.com/2015/01/16/learning-aci-part-6-access-policies/), we talked about _access policies_. At the end of that post, we had created a number of policies and applied them to our switching nodes. If you recall, by doing that we had provisioned a range of VLANs on one or more ports on a leaf node, but we had not actually _enabled_ any VLANs on a port. In order to do that, we need to create at least one EPG and associate it with a port.
+Welcome back! In this instalment, I'll look at how to get two bare metal hosts talking to each other in the fabric. In the [last post](https://araffe.github.io/aci/nexus%209000/2015/01/16/learning-aci-part-6-access-policies), we talked about _access policies_. At the end of that post, we had created a number of policies and applied them to our switching nodes. If you recall, by doing that we had provisioned a range of VLANs on one or more ports on a leaf node, but we had not actually _enabled_ any VLANs on a port. In order to do that, we need to create at least one EPG and associate it with a port.
 
 <!-- more -->
 

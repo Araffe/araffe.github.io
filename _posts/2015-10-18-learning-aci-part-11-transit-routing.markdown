@@ -18,7 +18,7 @@ tags:
 - sdn
 ---
 
-The 1.1(1j) & 11.1(1j) release of ACI introduced support for _transit routing._ Prior to this, the ACI fabric acted as a 'stub' routing domain; that is, it was not previously possible to advertise routing information from one routing domain to another through the fabric. I covered L3 Outsides in [part 9](http://adamraffe.com/2015/03/29/learning-aci-part-9-layer-3-external-connectivity/) of this series where I discussed how to configure a connection to a single routed domain. In this post, we'll look at a scenario where the fabric is configured with two L3 Outsides and how to advertise routes from one to another. Here is the setup I'm using:
+The 1.1(1j) & 11.1(1j) release of ACI introduced support for _transit routing._ Prior to this, the ACI fabric acted as a 'stub' routing domain; that is, it was not previously possible to advertise routing information from one routing domain to another through the fabric. I covered L3 Outsides in [part 9](https://araffe.github.io/aci/nexus%209000/2015/03/29/learning-aci-part-9-layer-3-external-connectivity) of this series where I discussed how to configure a connection to a single routed domain. In this post, we'll look at a scenario where the fabric is configured with two L3 Outsides and how to advertise routes from one to another. Here is the setup I'm using:
 
 [![Transit-Routing]({{ site.baseurl }}/img/2015/10/transit-routing5.jpg)]({{ site.baseurl }}/img/2015/10/transit-routing5.jpg)
 

@@ -19,16 +19,16 @@ Welcome to part 5 of this blog series - so far I have covered the following topi
 
 
 	
-  * [Part 1](http://adamraffe.com/2014/12/03/learning-aci-part-1-overview/) contained a very brief overview of ACI and what the series would cover.
+  * [Part 1](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-1-overview) contained a very brief overview of ACI and what the series would cover.
 
 	
-  * In [part 2](http://adamraffe.com/2014/12/03/learning-aci-part-2-bringing-up-a-fabric/), I talked through the fabric bring-up process.
+  * In [part 2](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-2-bringing-up-a-fabric), I talked through the fabric bring-up process.
 
 	
-  * [Part 3](http://adamraffe.com/2014/12/03/learning-aci-part-3-getting-familiar-with-the-apic/) was all about getting familiar with the APIC controller GUI.
+  * [Part 3](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-3-getting-familiar-with-the-apic) was all about getting familiar with the APIC controller GUI.
 
 	
-  * In the last blog, [part 4](http://adamraffe.com/2015/01/02/learning-aci-part-4-application-profiles-epgs-contracts-and-filters/), we took a look at some of the most important policy constructs within ACI - application profiles, EPGs, contracts and filters.
+  * In the last blog, [part 4](ttps://araffe.github.io/aci/nexus%209000/2015/01/02/learning-aci-part-4-application-profiles-epgs-contracts-and-filters), we took a look at some of the most important policy constructs within ACI - application profiles, EPGs, contracts and filters.
 
 
 Next on the list, we'll have a look at some networking concepts within ACI - namely private networks, bridge domains and subnets. Some of these are terms that you might not recognise, so what are they for?<!-- more -->
