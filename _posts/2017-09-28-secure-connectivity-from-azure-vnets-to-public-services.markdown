@@ -21,6 +21,7 @@ First, a few basics: a Virtual Network (VNet) is a private, isolated, network wi
 Although these VMs can (and very often do) have direct Internet access, it is of course possible to restrict connectivity into and out of this VNet according to your requirements.<!-- more -->
 
 Now consider the myriad of public services available in Azure, such as Blob Storage and Azure SQL. As these services are public, they do _not _sit inside a virtual network and are not isolated from the "outside world". The question is, if I want to connect from a VM inside a VNet to a public service such as Blob Storage, how does that work? It's actually pretty straightforward - VMs connect to Blob Storage or other Azure services using the normal Internet facing end points (e.g. _<storageaccount>.blob.core.windows.net_), as shown in the following diagram:
+
 ![Secure-VNets2.jpg](https://adamraffe.files.wordpress.com/2017/09/secure-vnets22.jpg)
 
 OK, that's fine - but doing it this way does open up a couple of issues:
