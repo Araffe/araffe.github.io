@@ -60,6 +60,7 @@ RX packets 248 bytes 125708 (125.7 KB)
 RX errors 0 dropped 0 overruns 0 frame 0
 TX packets 356 bytes 60542 (60.5 KB)
 TX errors 0 dropped 0 overruns 0 carrier 0 collisions 0
+
 {% endhighlight %}
 
 Here, we can see that a new bridge has been created called 'azure2'. This sits alongside the standard 'Docker0' bridge and will be used for connecting our containers to once they have been created. Note that the IP address of this bridge is 10.3.1.4 - this address happens to be the IP of the Docker host itself, allocated from the Azure virtual network.
@@ -91,6 +92,7 @@ RX packets:7 errors:0 dropped:0 overruns:0 frame:0
 TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
 collisions:0 txqueuelen:1000
 RX bytes:586 (586.0 B) TX bytes:0 (0.0 B)
+
 {% endhighlight %}
 
 
