@@ -75,7 +75,7 @@ docker: Error response from daemon: No address returned.
 
 Hmm, that didn't work - it seems that I'm not getting an IP address allocated to my container. Why is this? The reason is that - right now - we need to _pre-allocate_ IP addresses in Azure in order to make them available to containers. This could of course change (and hopefully will) in the future. In order to pre-allocate an address, I need to create an additional IP config and apply it to my Docker host's NIC. I could do this in a number of ways (portal, ARM templates, etc), but I'll use the Azure CLI here:
 
-% highlight shell %}
+{% highlight shell %}
 az network nic ip-config create -g Docker --nic-name docker-host191 --private-ip-address 10.3.1.5 --name IPConfig2
 {% endhighlight %}
 
