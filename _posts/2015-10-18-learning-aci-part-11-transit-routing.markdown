@@ -22,11 +22,11 @@ The 1.1(1j) & 11.1(1j) release of ACI introduced support for _transit routing._ 
 
 [![Transit-Routing]({{ site.baseurl }}/img/2015/10/transit-routing5.jpg)]({{ site.baseurl }}/img/2015/10/transit-routing5.jpg)
 
-<!-- more -->In my lab, I have a single 4900M switch which I have configured with two VRFs (Red and Green) to simulate the two routing domains. In the Red VRF, I have one loopback interface - Lo60 (10.1.60.60) which is being advertised into OSPF. In the Green VRF, I have Lo70 (10.1.70.70) and Lo90 (10.1.90.90) which are also being advertised into a separate OSPF process.
+In my lab, I have a single 4900M switch which I have configured with two VRFs (Red and Green) to simulate the two routing domains. In the Red VRF, I have one loopback interface - Lo60 (10.1.60.60) which is being advertised into OSPF. In the Green VRF, I have Lo70 (10.1.70.70) and Lo90 (10.1.90.90) which are also being advertised into a separate OSPF process.
 
 On the ACI fabric side, I have two L3 Outsides which correspond to the two VRFs. These two L3 Outsides are associated with a single private network (VRF) on the ACI fabric. OSPF is configured on both L3 Outsides with regular areas.
 
-At this point, my OSPF adjacencies are formed and my ACI fabric is receiving routing information from both VRFs on the 4900M, as can be seen in the following output (taken from the 'Fabric | Inventory' tab and then under the specific leaf node, under the Protocols | OSPF section):
+At this point, my OSPF adjacencies are formed and my ACI fabric is receiving routing information from both VRFs on the 4900M, as can be seen in the following output (taken from the 'Fabric', 'Inventory' tab and then under the specific leaf node, under the Protocols and then OSPF section):
 
 [![Screen Shot 2015-10-17 at 17.38.33]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-17-38-33.png)]({{ site.baseurl }}/img/2015/10/screen-shot-2015-10-17-at-17-38-33.png)
 
@@ -41,13 +41,13 @@ Let's say I now want to advertise the prefixes from the Green VRF (10.1.70.0/24 
 
 
 	
-  * **Security Import Subnet: **Any subnet defined as a security import subnet is used for policy control. Effectively, a subnet defined in this way forms the external EPG - this is the same functionality that existed in previous ACI releases. If I define a subnet as a security import subnet, this subnet will be accessible from internal EPGs (or other external EPGs), as long as a suitable contract is in place. Importantly, this option has nothing whatsoever to do with the control of routing information into or out of the fabric.
+  * **Security Import Subnet:** Any subnet defined as a security import subnet is used for policy control. Effectively, a subnet defined in this way forms the external EPG - this is the same functionality that existed in previous ACI releases. If I define a subnet as a security import subnet, this subnet will be accessible from internal EPGs (or other external EPGs), as long as a suitable contract is in place. Importantly, this option has nothing whatsoever to do with the control of routing information into or out of the fabric.
 
 	
-  * **Export Route Control Subnet: **This option is used to control which specific transit routes are advertised out of the fabric. If I mark a subnet with export route control capability, I am telling the ACI fabric that I want those routes to be advertised to the external device. Note that this option controls the export of _transit routes only_ - it does _not_ control the export of internal routes configured on a bridge domain (you can see evidence of this in the 4900M routing table output above, in which you can already see one of my BD routes - 192.168.1.0/24 in the table).
+  * **Export Route Control Subnet:** This option is used to control which specific transit routes are advertised out of the fabric. If I mark a subnet with export route control capability, I am telling the ACI fabric that I want those routes to be advertised to the external device. Note that this option controls the export of _transit routes only_ - it does _not_ control the export of internal routes configured on a bridge domain (you can see evidence of this in the 4900M routing table output above, in which you can already see one of my BD routes - 192.168.1.0/24 in the table).
 
 	
-  * **Import Route Control Subnet: **Similar to the export route control option, this option can be used to control which routes are allowed to be advertised into the fabric. Note that import route control is currently only available if BGP is used as the routing protocol.
+  * **Import Route Control Subnet:** Similar to the export route control option, this option can be used to control which routes are allowed to be advertised into the fabric. Note that import route control is currently only available if BGP is used as the routing protocol.
 
 
 How are these used in practice? Let's start with a simple example. I'm going to advertise just one of my 'Green' subnets (let's say 10.1.70.0/24) towards the 'Red' VRF. To do this, I add the 10.1.70.0 subnet to the L3 Out facing the Red VRF and mark it with the 'export route control' option:

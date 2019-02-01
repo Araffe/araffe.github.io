@@ -27,10 +27,10 @@ Before we start, it's worth taking a look at the high level architecture of ACI.
   * ACI uses a _leaf and spine_ topology. A given leaf node is connected to all spine nodes in the fabric, with no connectivity between leaves or between spine switches. All server, host, services and external connectivity is via leaf nodes - nothing is directly connected to a spine (apart from leaf nodes, obviously).
 
 	
-  * ACI uses a _policy model _to define how applications and attached systems communicate. In addition, policies are used within ACI to define almost every aspect of system configuration and administration.
+  * ACI uses a _policy model_ to define how applications and attached systems communicate. In addition, policies are used within ACI to define almost every aspect of system configuration and administration.
 
 	
-  * Several new constructs are introduced within ACI, including _End Point Groups, Application Profiles, Contracts, Filters, _as well as objects associated with external connectivity, such as _Layer 2 __and Layer 3 Outsides_. I'll be covering most of these in the forthcoming posts, but please have a look through the relevant sections of the ACI fundamentals book (linked to above) for more details.
+  * Several new constructs are introduced within ACI, including _End Point Groups, Application Profiles, Contracts, Filters,_ as well as objects associated with external connectivity, such as _Layer 2 and Layer 3 Outsides_. I'll be covering most of these in the forthcoming posts, but please have a look through the relevant sections of the ACI fundamentals book (linked to above) for more details.
 
 	
   * ACI has the ability to integrate closely with L4 - L7 services devices using the concept of _service graphs_. A service graph is essentially a description of where a given service (e.g. a firewall) should sit in the flow of traffic. Configuration of the services device can also move directly to the APIC through the use of device packages.
@@ -63,6 +63,6 @@ Now that we've covered some of the basics, I'll run quickly through what I plan 
   7. Further down the line, we'll take a look at some other topics including external connectivity, integration with L4-L7 services and more!
 
 
-OK, that's enough talking - let's get going! [Part 2](http://wp.me/p34R3O-bw) is here.
+OK, that's enough talking - let's get going! [Part 2 is here.](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-2-bringing-up-a-fabric)
 
 

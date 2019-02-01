@@ -15,17 +15,15 @@ tags:
 - Nexus
 ---
 
-Welcome to the second part of my blog series on ACI. Before we start to delve into policies, contracts, filters and all the other goodness to be found in ACI, we need to actually provision a fabric and bring it online. As it turns out, this is a really easy process and one which should take only a short amount of time. Obviously before we begin, we need to make sure everything is cabled correctly (leaf nodes to spine nodes, APIC controllers to leaf nodes, APIC out of band connectivity, etc).<!-- more -->
+Welcome to the second part of my blog series on ACI. Before we start to delve into policies, contracts, filters and all the other goodness to be found in ACI, we need to actually provision a fabric and bring it online. As it turns out, this is a really easy process and one which should take only a short amount of time. Obviously before we begin, we need to make sure everything is cabled correctly (leaf nodes to spine nodes, APIC controllers to leaf nodes, APIC out of band connectivity, etc).
 
 Before we start, there are a few parameters which are useful to think about in advance and have to hand during the setup process:
-
-
 
 	
   * The name you want to give your fabric.
 
 	
-  * _Controller Name _- the names you want to give to your APIC controllers (normally there will be three of these).
+  * _Controller Name_ - the names you want to give to your APIC controllers (normally there will be three of these).
 
 	
   * _TEP IP address pool_ - this range will be used by the fabric to automatically allocate TEP (Tunnel End Point) addresses. Every node (leaf and spine) will be allocated at least one TEP address. It's generally a good practice to dedicate a unique range for this.
@@ -37,7 +35,7 @@ Before we start, there are a few parameters which are useful to think about in a
   * _VLAN ID for the infrastructure network_ - this is the VLAN ID used for internal communication in the fabric, but also may be extended outside the fabric for communication to AVS virtual switches. Therefore, it's best to allocate an unused VLAN (be aware that this VLAN overlaps with the 'reserved' range on some other Nexus platforms).
 
 	
-  * _Management IP address and gateway - _this will be the out-of-band address you will use to browse to the APIC itself.
+  * _Management IP address and gateway_ - this will be the out-of-band address you will use to browse to the APIC itself.
 
 	
   * Admin password.
@@ -77,7 +75,7 @@ OK, so we now have a single leaf node registered - how do we discover the rest o
 
 Now at this point, we have our full switching topology discovered....but we still only have one APIC. As your other APICs are very likely to be connected to different leaf switches, we needed to wait until those switches were discovered before we could initialise the remaining APICs and form the cluster. So you can now run the setup script on the other APICs, using the same basic info as before, but making sure you use different controller IDs, management IP address, etc.
 
-Now that your remaining APICs are up and running, your fabric is pretty much ready to go - if you go back to the **Fabric | Inventory **section in the APIC GUI and click on **Topology**, you should see a graphical representation of your fabric:
+Now that your remaining APICs are up and running, your fabric is pretty much ready to go - if you go back to the **Fabric Inventory **section in the APIC GUI and click on **Topology**, you should see a graphical representation of your fabric:
 
 [![Screen Shot 2014-11-28 at 08.41.48]({{ site.baseurl }}/img/2014/11/screen-shot-2014-11-28-at-08-41-48.png)]({{ site.baseurl }}/img/2014/11/screen-shot-2014-11-28-at-08-41-48.png)
 

@@ -17,7 +17,6 @@ tags:
 
 Hello again! Hopefully you're back after reading parts [one](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-1-overview) and [two](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-2-bringing-up-a-fabric) of this series - in the first post, I covered a basic introduction to ACI and then in the last post, we looked at how the fabric initialisation and discovery process works. After the incredible excitement of building an ACI fabric, what do we do with it? Well, if you've never seen what an APIC looks like before, in this post we'll have a look around the APIC and start to find our way around the GUI.
 
-<!-- more -->
 
 **The Dashboard**
 
@@ -33,8 +32,7 @@ Moving to the right of the screen, you'll see a couple of sections showing fault
 
 Finally, on the bottom right we have the APIC cluster health. In the example, I have only one APIC but you can see that it is in service and 'fully fit'.
 
-**The 'Tenants' Tab
-**
+**The 'Tenants' Tab**
 
 Moving along to the Tenants tab at the top of the page - after clicking here, you'll see a screen similar to the following:
 

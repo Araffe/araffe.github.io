@@ -17,8 +17,6 @@ tags:
 
 Welcome to part 8 - let's quickly recap what we have covered so far in this series:
 
-
-
 	
   * [Part 1](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-1-overview) introduced this series and discussed what topics would be covered, as well as a very brief overview of ACI.
 
@@ -41,7 +39,7 @@ Welcome to part 8 - let's quickly recap what we have covered so far in this seri
   * Last time out in [part 7](https://araffe.github.io/aci/nexus%209000/2015/02/18/learning-aci-part-7-basic-connectivity), I walked through setting up basic connectivity between two bare metal hosts.
 
 
-OK, so what's next? In this part, we'll discuss _VMM Integration_. What does this mean exactly? Firstly, VMM stands for _Virtual Machine Manager_ - in other words, we are talking about integration with a VM management system such as VMware vCenter, Microsoft SCVMM and so on. At the time of writing this post, ACI supports integration with vCenter (others will be supported later), so this is what we'll concentrate on here. I should also point out that we could also use the Cisco _Application Virtual Switch_ (AVS) to achieve this integration, but I'm going to focus on using the regular VMware distributed virtual switch in this post.<!-- more -->
+OK, so what's next? In this part, we'll discuss _VMM Integration_. What does this mean exactly? Firstly, VMM stands for _Virtual Machine Manager_ - in other words, we are talking about integration with a VM management system such as VMware vCenter, Microsoft SCVMM and so on. At the time of writing this post, ACI supports integration with vCenter (others will be supported later), so this is what we'll concentrate on here. I should also point out that we could also use the Cisco _Application Virtual Switch_ (AVS) to achieve this integration, but I'm going to focus on using the regular VMware distributed virtual switch in this post.
 
 But what exactly do we gain by integrating ACI with a VM management system? Why would we actually want to do this? Consider a simple example in a 'traditional' environment: let's say a server virtualisation administrator is provisioning a set of virtual machines to be used for a certain application. These VMs will be used across a number of application tiers (let's say web, app and DB just for simplicity). We can assume that there will be a port group at the virtual switch layer corresponding to each application tier and that each one will presumably map back to a VLAN on the physical network. But which VLAN should be used for each port group? The virtualisation administrator will need to work together with the network administrator to agree on which VLAN should be used for each application tier / port group. Is this really something a virtualisation admin wants to be worrying about? For that matter, does the network admin want to be worried about which VLAN is used for any given application tier? The answer in most cases is "no", which is precisely where ACI VMM integration comes in.
 
@@ -49,7 +47,7 @@ So how does this work? Fundamentally, configuring VMM integration from ACI resul
 
 [![VMM-Integration]({{ site.baseurl }}/img/2015/02/vmm-integration1.jpg)]({{ site.baseurl }}/img/2015/02/vmm-integration1.jpg)
 
-In this example, we have created a tenant on the ACI fabric called _IT_. Within the IT tenant, we have an application profile named _App1_. Within this app profile, we are creating three End Point Groups (EPGs) corresponding to our three-tiered application (Web, App, DB). Now this is where it gets interesting - as we created our EPGs, the APIC automatically created a corresponding port group on the DVS. Note the naming of the port group as _<tenant>|<app-profile>|<EPG-name>_, for example _IT|App1|Web_. You might also notice that each of our port groups has been allocated a VLAN (e.g.  Web = VLAN 100, App = VLAN 101, etc). These VLANs have been automatically allocated to our port groups by the APIC - they have been taken from a dynamic VLAN pool which we have pre-configured on the APIC.
+In this example, we have created a tenant on the ACI fabric called _IT_. Within the IT tenant, we have an application profile named _App1_. Within this app profile, we are creating three End Point Groups (EPGs) corresponding to our three-tiered application (Web, App, DB). Now this is where it gets interesting - as we created our EPGs, the APIC automatically created a corresponding port group on the DVS. Note the naming of the port group as {% raw %}tenant|app-profile|EPG-name{% endraw %}, for example {% raw %}IT|App1|Web{% endraw %}. You might also notice that each of our port groups has been allocated a VLAN (e.g.  Web = VLAN 100, App = VLAN 101, etc). These VLANs have been automatically allocated to our port groups by the APIC - they have been taken from a dynamic VLAN pool which we have pre-configured on the APIC.
 
 What does the virtualisation administrator have to do here? He or she simply adds the VMs to the correct port groups - no need to worry about provisioning these port groups, or which VLAN should be associated with each one - it all happens automatically.
 

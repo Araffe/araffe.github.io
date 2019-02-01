@@ -31,11 +31,11 @@ Welcome to part 5 of this blog series - so far I have covered the following topi
   * In the last blog, [part 4](ttps://araffe.github.io/aci/nexus%209000/2015/01/02/learning-aci-part-4-application-profiles-epgs-contracts-and-filters), we took a look at some of the most important policy constructs within ACI - application profiles, EPGs, contracts and filters.
 
 
-Next on the list, we'll have a look at some networking concepts within ACI - namely private networks, bridge domains and subnets. Some of these are terms that you might not recognise, so what are they for?<!-- more -->
+Next on the list, we'll have a look at some networking concepts within ACI - namely private networks, bridge domains and subnets. Some of these are terms that you might not recognise, so what are they for?
 
 **Private Networks**
 
-In ACI, a private network - sometimes known as a _context_ - is used to define a layer 3 forwarding domain within the fabric. A private network can support IP ranges which overlap with another private network on the fabric. If you're thinking you've seen this somewhere before, you're right - private networks look very similar to VRFs in the traditional networking world. In fact, a private network / context_ is _a VRF - if you go to a fabric enabled Nexus 9K switch, you can see that each private network you define is instantiated as a VRF. Generally speaking, each tenant will have at least one private network defined.
+In ACI, a private network - sometimes known as a _context_ - is used to define a layer 3 forwarding domain within the fabric. A private network can support IP ranges which overlap with another private network on the fabric. If you're thinking you've seen this somewhere before, you're right - private networks look very similar to VRFs in the traditional networking world. In fact, a private network / context _is_ a VRF - if you go to a fabric enabled Nexus 9K switch, you can see that each private network you define is instantiated as a VRF. Generally speaking, each tenant will have at least one private network defined.
 
 A private network is defined under a tenant, under the 'Networking' side menu:
 
@@ -53,8 +53,6 @@ When you define a BD (from the same 'Networking' side menu we used to define our
 
 Let's look at these options in more detail:
 
-
-
 	
   * _L2 Unknown Unicast:_ This option controls whether the ACI spine proxy database will be used for unknown unicast traffic (the default), or whether 'traditional' flooding of unknown unicast traffic should occur. You would typically use 'flood' mode if extending the BD to an external network (such as to a legacy environment).
 
@@ -62,17 +60,17 @@ Let's look at these options in more detail:
   * _Unknown Multicast Flooding:_ This controls whether traffic should be flooded to all ports on a leaf node, or whether it should be constrained to only ports where say a multicast receiver resides.
 
 	
-  * _ARP Flooding: _By default, ACI will convert ARP broadcast traffic into unicast traffic and send it to the correct leaf node. This option can be disabled if traditional ARP flooding is needed.
+  * _ARP Flooding:_ By default, ACI will convert ARP broadcast traffic into unicast traffic and send it to the correct leaf node. This option can be disabled if traditional ARP flooding is needed.
 
 	
-  * _Unicast Routing: _Unicast routing is enabled by default and is required if the fabric is performing routing for a BD (e.g. if a subnet is defined). You might wish to disable this if the fabric is not performing routing for a BD (i.e. a gateway resides outside the fabric, such as on a firewall or external router).
+  * _Unicast Routing:_ Unicast routing is enabled by default and is required if the fabric is performing routing for a BD (e.g. if a subnet is defined). You might wish to disable this if the fabric is not performing routing for a BD (i.e. a gateway resides outside the fabric, such as on a firewall or external router).
 
 
 A bridge domain is always associated with a private network - you'll need to select one when you create the BD.
 
 **Subnets**
 
-When you create a bridge domain, you have the option of defining a _subnet _under the BD:
+When you create a bridge domain, you have the option of defining a _subnet_ under the BD:
 
 [![Subnet]({{ site.baseurl }}/img/2015/01/subnet.png)]({{ site.baseurl }}/img/2015/01/subnet.png)
 
@@ -80,16 +78,13 @@ When you define a subnet under a BD, you are creating an anycast gateway - that 
 
 You'll also notice that we can control the scope of the subnet - private, public or shared. These are used as follows:
 
-
-
-	
-  * _Private: _A private subnet is one that is not advertised to any external entity via a L3 outside and will be constrained to the fabric.
+  * _Private:_ A private subnet is one that is not advertised to any external entity via a L3 outside and will be constrained to the fabric.
 
 	
   * _Public:_ A public subnet is flagged to be advertised to external entities via an L3 outside (e.g. via OSPF or BGP).
 
 	
-  * _Shared: _If a subnet is flagged as shared, it will be eligible for advertisement to other tenants or contexts within the fabric. This is analogous to VRF route leaking in traditional networks.
+  * _Shared:_ If a subnet is flagged as shared, it will be eligible for advertisement to other tenants or contexts within the fabric. This is analogous to VRF route leaking in traditional networks.
 
 
-Hopefully this gives you a good overview of the main networking concepts within ACI - in part 6, I'm going to walk you through creating an _access policy _- this is a crucial part of attaching hosts and other devices to the fabric.
+Hopefully this gives you a good overview of the main networking concepts within ACI - in part 6, I'm going to walk you through creating an _access policy_ - this is a crucial part of attaching hosts and other devices to the fabric.

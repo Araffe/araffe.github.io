@@ -14,11 +14,11 @@ tags:
 - APIC
 ---
 
-In this post, we'll take a closer look at some of the most important constructs within the ACI solution - application profiles, End Point Groups (EPGs), contracts and filters. Hopefully you've taken a look at the other parts in this series - in [part 1](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-1-overview), I gave a brief overview of ACI and what I would be covering in the series. [Part 2](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-2-bringing-up-a-fabric) discussed the fabric bring-up process, with [part 3](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-3-getting-familiar-with-the-apic) giving a short tour of the APIC.<!-- more -->
+In this post, we'll take a closer look at some of the most important constructs within the ACI solution - application profiles, End Point Groups (EPGs), contracts and filters. Hopefully you've taken a look at the other parts in this series - in [part 1](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-1-overview), I gave a brief overview of ACI and what I would be covering in the series. [Part 2](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-2-bringing-up-a-fabric) discussed the fabric bring-up process, with [part 3](https://araffe.github.io/aci/nexus%209000/2014/12/03/learning-aci-part-3-getting-familiar-with-the-apic) giving a short tour of the APIC.
 
 **End Point Groups**
 
-You'll hopefully be aware by now that ACI introduces a number of new concepts that provide new ways of defining connectivity using a policy based approach. Of these, arguably the most important is the _End Point Group (EPG). _What is an EPG and how is it used within ACI? Well, the basic idea is that you define groups of servers, VMs, IP storage or other devices that have common policy requirements - once these devices are grouped together, it becomes much easier to define and apply policy to the group, rather than to individual end points.
+You'll hopefully be aware by now that ACI introduces a number of new concepts that provide new ways of defining connectivity using a policy based approach. Of these, arguably the most important is the _End Point Group (EPG)_. What is an EPG and how is it used within ACI? Well, the basic idea is that you define groups of servers, VMs, IP storage or other devices that have common policy requirements - once these devices are grouped together, it becomes much easier to define and apply policy to the group, rather than to individual end points.
 
 Let's imagine you have a standard three-tiered type of application (I'm aware that this is a rather overused example, but it serves its purpose in this case):
 
@@ -32,7 +32,7 @@ How do we define which end points reside in which EPG? That can be done either s
 
 1) Within an EPG, communication is free-flowing - an end point can communicate freely with another end point within the same EPG, regardless of where those EPs sit physically or virtually.
 
-2) Between EPGs, _no communication is permitted by default - _if you do nothing else at this point, an EP residing in the "Web" EPG will not be able to communicate with an EP in the "App" EPG.
+2) Between EPGs, _no communication is permitted by default_ - if you do nothing else at this point, an EP residing in the "Web" EPG will not be able to communicate with an EP in the "App" EPG.
 
 Now that we know these rules, it follows that we need to put something extra in place if we want inter-EPG communication. This is where contracts and filters come in.
 
@@ -52,8 +52,7 @@ This filter can now be referenced when creating a contract - in this case, the f
 
 Note that you can apply the contract to both directions if bi-directional communication is required between EPGs.
 
-**Application Profiles
-**
+**Application Profiles**
 
 OK, so we have some EPGs defined and the contracts / filters we need to communicate between them. We now need some way of tying all of this together - an _Application Profile_ is simply a collection of EPGs and the policies needed to communicate between them:
 

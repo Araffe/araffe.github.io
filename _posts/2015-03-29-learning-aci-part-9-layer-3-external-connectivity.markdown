@@ -20,7 +20,7 @@ So far in this series, everything we have discussed has been concerned with what
 
 Let's first take a look at the topology I'm going to discuss in this post:
 
-[![L3-Outside]({{ site.baseurl }}/img/2015/03/l3-outside.jpg)]({{ site.baseurl }}/img/2015/03/l3-outside.jpg)<!-- more -->As you can see, we are going to set up a connection from the fabric using leaf node 101 (this will be our border leaf) to an external router - in this case, a Cisco 4900M. The physical connection between the leaf node and the 4900M will be a port-channel consisting of two interfaces. We will run OSPF between the fabric and our external router. Note also from the above diagram that MP-BGP will be running inside the fabric - this is needed for the distribution of external routing information through the fabric. The existence of MP-BGP is purely for this internal route distribution within the ACI fabric - it is _not_ running outside the fabric, e.g. there is no MP-BGP peering between the fabric and any external entity.
+[![L3-Outside]({{ site.baseurl }}/img/2015/03/l3-outside.jpg)]({{ site.baseurl }}/img/2015/03/l3-outside.jpg). As you can see, we are going to set up a connection from the fabric using leaf node 101 (this will be our border leaf) to an external router - in this case, a Cisco 4900M. The physical connection between the leaf node and the 4900M will be a port-channel consisting of two interfaces. We will run OSPF between the fabric and our external router. Note also from the above diagram that MP-BGP will be running inside the fabric - this is needed for the distribution of external routing information through the fabric. The existence of MP-BGP is purely for this internal route distribution within the ACI fabric - it is _not_ running outside the fabric, e.g. there is no MP-BGP peering between the fabric and any external entity.
 
 **Enable MP-BGP Inside the Fabric**
 
@@ -34,15 +34,13 @@ That's all we need to do to enable BGP to run - you can check that this is the c
 
 [![BGP Sessions]({{ site.baseurl }}/img/2015/03/bgp-sessions.png)]({{ site.baseurl }}/img/2015/03/bgp-sessions.png)
 
-**Configure Access Policies
-**
+**Configure Access Policies**
 
 Now that we have MP-BGP enabled inside the fabric, the next step is to configure any access policies required. In this post, I'm going to use a VLAN and SVI combination to build the layer 3 connection between the fabric and my external router. I'll therefore need to configure a VLAN pool, Attachable Entity Profile, Interface Policy Group, etc and apply those to the interfaces I will use for the external L3 connection.
 
 I've already covered configuration of access policies in [part 6](http://adamraffe.com/2015/01/16/learning-aci-part-6-access-policies/) so I won't cover that again here, but one key difference here is that rather than configuring a physical domain (as shown in part 6), I now need to use an _External Routed Domain_ and apply my VLAN pool to that domain instead.
 
-**Configure the External Routed Network
-**
+**Configure the External Routed Network**
 
 Before we go any further, let's take a look at what I am trying to achieve logically:
 
@@ -62,11 +60,11 @@ The next step is to configure nodes and interfaces. First, click the plus sign u
 
 [![Configure Node]({{ site.baseurl }}/img/2015/03/configure-node.png)]({{ site.baseurl }}/img/2015/03/configure-node.png)
 
-After submitting, add an OSPF interface profile. From here, you can select the interface type and interfaces which you want to use for this connection. Note here that there are three types of interface available: _Routed Interfaces, SVIs, _or _Routed Sub-Interfaces._ I'm going to use the SVI option here, which means that I will have a VLAN between my fabric and external router:
+After submitting, add an OSPF interface profile. From here, you can select the interface type and interfaces which you want to use for this connection. Note here that there are three types of interface available: _Routed Interfaces, SVIs,_ or _Routed Sub-Interfaces._ I'm going to use the SVI option here, which means that I will have a VLAN between my fabric and external router:
 
 [![OSPF -Interface]({{ site.baseurl }}/img/2015/03/ospf-interface.png)]({{ site.baseurl }}/img/2015/03/ospf-interface.png)
 
-In my example, I am using a port-channel for the physical connection between my fabric and external router - I've selected VLAN 12 as the encapsulation (this must fall within the range configured in the VLAN pool you are using!). Finally, I've configured an IP address of 172.16.1.1/24 for the SVI on this border node. One important point here is that this SVI is _not the same as an anycast gateway configured as part of a regular bridge domain_. This is a separate SVI interface used solely for external routing from the border leaf node. Submit this configuration and go back to the main interface profile page. We now need to create an OSPF interface policy using the drop down box in the middle of the page:
+In my example, I am using a port-channel for the physical connection between my fabric and external router - I've selected VLAN 12 as the encapsulation (this must fall within the range configured in the VLAN pool you are using!). Finally, I've configured an IP address of 172.16.1.1/24 for the SVI on this border node. One important point here is that this SVI is _not_ the same as an anycast gateway configured as part of a regular bridge domain. This is a separate SVI interface used solely for external routing from the border leaf node. Submit this configuration and go back to the main interface profile page. We now need to create an OSPF interface policy using the drop down box in the middle of the page:
 
 [![OSPF-Int-Pol]({{ site.baseurl }}/img/2015/03/ospf-int-pol.png)]({{ site.baseurl }}/img/2015/03/ospf-int-pol.png)
 
@@ -90,7 +88,7 @@ At this point, I am going to configure my external router with some basic OSPF c
 
 I also have a number of loopback interfaces configured as part of area 0.
 
-Let's now take a look at our fabric to see if any OSPF adjacencies are up. From the **Fabric **tab, I choose **Inventory** and then drill down to the leaf node in question (in my case node 101). Under **Protocols** and then **OSPF**, I can choose to view OSPF neighbours, interfaces, routes and so on. If I look at under Neighbors, I see my 4900M external router as an adjacency:
+Let's now take a look at our fabric to see if any OSPF adjacencies are up. From the **Fabric** tab, I choose **Inventory** and then drill down to the leaf node in question (in my case node 101). Under **Protocols** and then **OSPF**, I can choose to view OSPF neighbours, interfaces, routes and so on. If I look at under Neighbors, I see my 4900M external router as an adjacency:
 
 [![OSPF-adjacency]({{ site.baseurl }}/img/2015/03/ospf-adjacency.png)]({{ site.baseurl }}/img/2015/03/ospf-adjacency.png)
 

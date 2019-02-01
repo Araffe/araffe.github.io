@@ -16,13 +16,13 @@ So far in this series, we've covered some basic concepts in ACI, including [fabr
 
 [![Access Policies]({{ site.baseurl }}/img/2015/01/access-policies.png)]({{ site.baseurl }}/img/2015/01/access-policies.png)
 
-<!-- more -->Access policies are used to control parameters relating to access into the fabric, such as which VLANs to use on a port, which leaf nodes and ports should be used for specific hosts or devices, as well as configuration of other access parameters such as LLDP, CDP or storm control.
+Access policies are used to control parameters relating to access into the fabric, such as which VLANs to use on a port, which leaf nodes and ports should be used for specific hosts or devices, as well as configuration of other access parameters such as LLDP, CDP or storm control.
 
 In this post, I'm going to walk through the creation of an access policy specifically for the connection of a bare metal host to the fabric; I'll cover VM connectivity in a future post. By the end of this exercise, I will have provisioned a VLAN pool on a particular port on a particular leaf node. One important point is that I am not yet _enabling_ any VLAN on a port - that happens only when I create an EPG and link it to a port. I'll also say here that there are easier ways of achieving the creation of access policies (using wizards, API, etc). The method I'm using here is somewhat long-winded, but is useful to show the relationship between policies.
 
 So let's start at the beginning: defining a VLAN pool.
 
-**1. Define a ****VLAN Pool**
+**1. Define a VLAN Pool**
 
 [![VLAN-Pool]({{ site.baseurl }}/img/2015/01/vlan-pool.png)]({{ site.baseurl }}/img/2015/01/vlan-pool.png)
 
@@ -32,13 +32,11 @@ Although we talk about bridge domains inside the ACI fabric, we still need to us
 
 Notice the 'allocation mode' option can be set to either 'static' or 'dynamic'. Which one should you choose?
 
-
+	
+  * _Static_ VLAN allocation mode should be used if the VLAN pool in question will be used for bare metal hosts or other non-virtualised devices. Later, when we create EPGs, we will manually assign a VLAN from the static pool to the EPG and port.
 
 	
-  * _Static _ VLAN allocation mode should be used if the VLAN pool in question will be used for bare metal hosts or other non-virtualised devices. Later, when we create EPGs, we will manually assign a VLAN from the static pool to the EPG and port.
-
-	
-  * _Dynamic _allocation mode is used when connecting VMs into the fabric , specifically when using VMM integration with the hypervisor management system. In that case, a VLAN will be dynamically assigned to the port group that gets created on the Distributed Virtual Switch. I'll cover this in more detail in a future post.
+  * _Dynamic_ allocation mode is used when connecting VMs into the fabric , specifically when using VMM integration with the hypervisor management system. In that case, a VLAN will be dynamically assigned to the port group that gets created on the Distributed Virtual Switch. I'll cover this in more detail in a future post.
 
 
 In my example, I want to connect a bare metal host, so I choose the static option.
@@ -61,7 +59,7 @@ Wait...a what?! The AAEP (as I will will refer to it from now on) is a way of gr
 
 [![AAEP-Create]({{ site.baseurl }}/img/2015/01/aaep-create.png)]({{ site.baseurl }}/img/2015/01/aaep-create.png)
 
-Note that I _could _attach my AAEP to an interface as part of this step - however, I'm not doing that here so I can explain how that works properly in later steps.
+Note that I _could_ attach my AAEP to an interface as part of this step - however, I'm not doing that here so I can explain how that works properly in later steps.
 
 **4. Define Interface Policies and an Interface Policy Group**
 
@@ -77,7 +75,7 @@ In my example, I am referring to a link level policy that specifies 1Gbps port s
 
 [![IntProfile-Flow]({{ site.baseurl }}/img/2015/01/intprofile-flow.png)]({{ site.baseurl }}/img/2015/01/intprofile-flow.png)
 
-At this point, we are ready to start applying the policies we have created to one or more interfaces on one or more leaf nodes. The first thing we need to do is to create an _interface profile_. An interface profile is a policy which contains a _port selector__._ The port selector is used to specify a particular port number - note that we are not yet specifying which leaf node we want to apply the policy to (that happens in the next step). In the example below, I am creating an interface profile containing a port selector referring to port 1/27. Note that the selector policy also refers to the interface policy group I created in the last step.
+At this point, we are ready to start applying the policies we have created to one or more interfaces on one or more leaf nodes. The first thing we need to do is to create an _interface profile_. An interface profile is a policy which contains a _port selector_. The port selector is used to specify a particular port number - note that we are not yet specifying which leaf node we want to apply the policy to (that happens in the next step). In the example below, I am creating an interface profile containing a port selector referring to port 1/27. Note that the selector policy also refers to the interface policy group I created in the last step.
 
 [![Int-Selector]({{ site.baseurl }}/img/2015/01/int-selector.png)]({{ site.baseurl }}/img/2015/01/int-selector.png)
 

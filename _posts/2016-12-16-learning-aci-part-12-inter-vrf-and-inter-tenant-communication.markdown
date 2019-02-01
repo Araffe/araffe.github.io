@@ -17,8 +17,6 @@ tags:
 
 ACI has the ability to divide the fabric up into multiple tenants, or multiple VRFs within a tenant. If communication is required between tenants or between VRFs, one common approach is to route traffic via an external device (e.g. a firewall or router). However, ACI is also able to provide inter-tenant or inter-VRF connectivity directly, without traffic ever needing to leave the fabric. For inter-VRF or inter-tenant connectivity to happen, two fundamental requirements must be satisfied:
 
-
-
 	
   1. Routes must be leaked between the two VRFs or tenants that need to communicate.
 
@@ -90,9 +88,6 @@ In this scenario, we are going to configure communication between EPGs which sit
 ![scenario-2-1]({{ site.baseurl }}/img/2016/12/scenario-2-1.png)
 
 In terms of configuration, this scenario is actually very similar to scenario 1 - we still need to configure the following:
-
-
-
 	
   * Consumer subnet at the bridge domain level (marked as S_hared Between VRFs_).
 
@@ -100,7 +95,7 @@ In terms of configuration, this scenario is actually very similar to scenario 1 
   * Provider subnet at the EPG level (marked as S_hared Between VRFs_).
 
 
-The major difference in this scenario is that we must now configure the scope of the contract as **_Global, _**and we must also_ export_ the contract from the provider side tenant to the consumer side tenant_. _On the provider side, export the contract under the **Security Policies** section of the tenant config. On the consumer side, we will consume the exported contract as a _Contract Interface_ under the EPG. The final configuration looks something like this:
+The major difference in this scenario is that we must now configure the scope of the contract as **_Global_**, and we must also _export_ the contract from the provider side tenant to the consumer side tenant. On the provider side, export the contract under the **Security Policies** section of the tenant config. On the consumer side, we will consume the exported contract as a _Contract Interface_ under the EPG. The final configuration looks something like this:
 
 ![scenario-2-2]({{ site.baseurl }}/img/2016/12/scenario-2-2.png)
 

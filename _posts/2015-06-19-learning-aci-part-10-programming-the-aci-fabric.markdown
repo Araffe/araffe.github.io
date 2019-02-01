@@ -21,8 +21,6 @@ Everything I've shown so far in this blog series has been focused on using the A
 One particularly strong aspect of ACI is how easy it is for network engineers to start interacting with the fabric in a programmatic manner. Speaking from personal experience, it's incredibly easy for someone with a 'traditional' network engineering background with limited development experience to start using the programmability features of ACI. With that said, let's take a look at some of the options we have around ACI programmability:
 
 
-
-	
   * Native REST API using XML or JSON
 
 	
@@ -48,7 +46,7 @@ In the above screenshot, my query has returned 32 objects of class fvTenant (I h
 
 [![Visore-children]({{ site.baseurl }}/img/2015/06/visore-children.png)]({{ site.baseurl }}/img/2015/06/visore-children.png)
 
-In the above screenshot, you can see two of the child objects for my tenant (named "adraffe-test") - specifically, we see an application profile (class fvAp, named "Test-App-1) and a bridge domain (class fvBD, named "Adam-Test-BD"). Scrolling further down reveals additional objects such as private networks, contracts and filters. Clicking the right arrow next to the DN takes you further down the tree - for example, drilling further into the "fvAp" object here would take me to the EPG objects contained within.
+In the above screenshot, you can see two of the child objects for my tenant (named "adraffe-test") - specifically, we see an application profile (class fvAp, named "Test-App-1") and a bridge domain (class fvBD, named "Adam-Test-BD"). Scrolling further down reveals additional objects such as private networks, contracts and filters. Clicking the right arrow next to the DN takes you further down the tree - for example, drilling further into the "fvAp" object here would take me to the EPG objects contained within.
 
 Now that we have some knowledge of the object model, we can start with some basic interaction with the REST API. The first thing I need to do is authenticate, which I can do by posting to the URL in the screen shot below and sending the XML shown:
 
