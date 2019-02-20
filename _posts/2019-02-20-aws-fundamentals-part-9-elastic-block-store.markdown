@@ -75,7 +75,7 @@ How does this actually work in practice? What actually happens is that when chan
 
 Let's look at how you create a snapshot. From the left hand menu within the EC2 part of the console, select 'Snapshots' and then 'Create Snapshot'. You'll then see the following screen:
 
-![create-snapshot]({{ site.baseurl }}/img/2019/create-snapshot.png)
+![create-snapshot]({{ site.baseurl }}/img/2019/Create-snapshot.png)
 
 As you can see, this is very simple - you need to specify the volume that the snapshot will be taken from and optionally provide a description and tag. Now once you press the 'Create' button, you'll see a state of 'Pending' under the snapshot item that results - what is actually happening here is that the data from the volume is being copied to the snapshot in the background. Depending on how large the volume is, that might take a few hours. Where is the data actually being stored? The snapshots themselves are all stored in S3.
 

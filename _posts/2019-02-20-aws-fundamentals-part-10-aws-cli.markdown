@@ -45,7 +45,7 @@ aws_access_key_id =
 aws_secret_access_key =
 {% endhighlight %}
 
-What are the different sections for (default, eks-test-2, nocreds)? These are _profiles_ that I have set up. Each of these profiles contains a different set of credentials (the 'nocreds' profile doesn't contain any credentials at all due to some testing I was doing). To use these profiles, you can set an environment variable that specifies the profile - {% highlight shell %}export AWS_DEFAULT_PROFILE=nocreds{% endhighlight %}. Alternatively, you can specify the profile on each command that you run, for example:
+What are the different sections for (default, eks-test-2, nocreds)? These are _profiles_ that I have set up. Each of these profiles contains a different set of credentials (the 'nocreds' profile doesn't contain any credentials at all due to some testing I was doing). To use these profiles, you can set an environment variable that specifies the profile - **export AWS_DEFAULT_PROFILE=nocreds**. Alternatively, you can specify the profile on each command that you run, for example:
 
 {% highlight shell %}
 8c8590cd6650:~ adaraffe$ aws s3 ls --profile=nocreds
@@ -57,11 +57,11 @@ As you can see, I've specified the 'nocreds' profile in the above S3 command, wh
 
 As I mentioned in part 3, AWS CLI commands generally take the following form: firstly, the 'aws' command, followed by the name of the service you want to interact with (e.g. ec2, s3, etc) and then the specific action you want to take. Some examples are as follows:
 
-{% highlight shell %}aws s3 ls{% endhighlight %} - lists all S3 buckets in your account
+* **aws s3 ls**: lists all S3 buckets in your account
 
-{% highlight shell %}aws ec2 describe-instances{% endhighlight %} - describes every EC2 instance in your account
+* **aws ec2 describe-instances**: describes every EC2 instance in your account
 
-{% highlight shell %}aws ec2 start-instances --instance-ids i-079db50f95285d315{% endhighlight %} - starts the instance with the instance ID specified
+* **aws ec2 start-instances --instance-ids i-079db50f95285d315**: starts the instance with the instance ID specified
 
 # Changing the Output Format
 
@@ -118,7 +118,7 @@ You might find it easier to use the text output type if using Linux tools such a
 
 # Using --query to Filter Output
 
-Taking the example in the section above - {% highlight shell %}aws ec2 describe-instances{% endhighlight %}, this potentially returns a lot of data, especially if you are running a lot of EC2 instances in your account. It's highly likely that you are looking for more specific information - for example, you might be looking for the private IP address associated with one specific instance. Fortunately, this is easy to achieve through the use of CLI queries.
+Taking the example in the section above - **aws ec2 describe-instances**, this potentially returns a lot of data, especially if you are running a lot of EC2 instances in your account. It's highly likely that you are looking for more specific information - for example, you might be looking for the private IP address associated with one specific instance. Fortunately, this is easy to achieve through the use of CLI queries.
 
 Query strings use the [JMESpath](http://jmespath.org/) query specification. To demonstrate how it works, let's look at some examples.
 
