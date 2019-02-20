@@ -68,7 +68,7 @@ This gives us the following:
 
 ![Queries-7]({{ site.baseurl }}/img/2017/11/queries-7.jpg)
 
-Now let's take this a bit further. Suppose I want to get a list of all the VMs _not _currently running (i.e. deallocated) and with 'Linux' in the name - and then start those VMs. One way of achieving this is to do the following:
+Now let's take this a bit further. Suppose I want to get a list of all the VMs _not_ currently running (i.e. deallocated) and with 'Linux' in the name - and then start those VMs. One way of achieving this is to do the following:
 
     
     {% highlight shell %}az vm list -g demo.VMs --show-details --query "[?contains(name, 'Linux') && powerState == 'VM deallocated']".id -o tsv | xargs -L1 bash -c 'az vm start --ids $0'{% endhighlight %}
