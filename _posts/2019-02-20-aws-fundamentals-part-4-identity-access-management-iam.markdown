@@ -71,7 +71,7 @@ An IAM policy is really just a way of defining what actions can be taken for a g
     }
 {% endhighlight %}
 
-Hopefully it's pretty easy to see what is going on here; this policy is allowing all actions (*) to be performed on any resource (*). In fact the JSON shown above defines the built in 'AdministratorAccess' policy within IAM. OK, that was easy, but can you guess what this next policy does?
+Hopefully it's pretty easy to see what is going on here; this policy is allowing all actions (\*) to be performed on any resource (\*). In fact the JSON shown above defines the built in 'AdministratorAccess' policy within IAM. OK, that was easy, but can you guess what this next policy does?
 
 {% highlight json %}    
     {
