@@ -173,7 +173,7 @@ You can view information about the stack as it is being created, or after the st
 
 You can also see a list of all the resources created as part of the stack on the "Resources" tab:
 
-![CF-Resources]({{ site.baseurl }}/img/2019/cf-resources.png)
+![CF-Resources]({{ site.baseurl }}/img/2019/cfn-resources.png)
 
 One of the tabs in the bottom half of the page is named _Outputs_. An output from a CloudFormation stack is a piece of information related to that stack that you can use in other stacks by importing the info, or simply to view in the console so that you can use the information when configuring other parts of AWS. Here's an example: let's say you define an S3 bucket within a CloudFormation stack - because S3 buckets must have globally unique names, you use the template to generate a random name. However, you obviously don't know what that random name will be, but you will need to use it for operations such as uploading or downloading data to / from that bucket. You can use outputs to show you that information once the stack has been created.
 
